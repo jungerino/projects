@@ -1,0 +1,96 @@
+// Headings
+// -------------------------
+
+// sass-lint:disable single-line-per-selector
+h1, h2, h3, h4, h5 {
+
+    $heading-margin-top: 1.5em;
+    $heading-margin-bottom: 0.5em;
+
+    line-height: 1.2;
+    margin: $heading-margin-top 0 $heading-margin-bottom;
+
+    // Disable top margin for first children
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+h1 {
+    font-size: $h1-size-full;
+    font-weight: $h1-weight-full;
+}
+
+h2 {
+    font-size: $h2-size-full;
+    font-weight: $h2-weight-full;
+}
+
+h3 {
+    font-size: $h3-size-full;
+    font-weight: $h3-weight-full;
+}
+
+h4 {
+    font-size: $h4-size-full;
+    font-weight: $h4-weight-full;
+}
+
+h5 {
+    font-size: $h5-size-full;
+    font-weight: $h5-weight-full;
+}
+// sass-lint:enable single-line-per-selector
+
+
+// Body text
+// -------------------------
+
+p {
+
+    // Large paragraph
+    &.lead {
+        line-height: 1.6;
+        max-width: none;
+    }
+
+    strong {
+        color: $text-color-dark;
+        font-weight: 500; // Medium
+    }
+}
+
+
+// Managed column width
+.text-column {
+
+    @include media-breakpoint-up(md) {
+        margin: 0 auto;
+        width: $paragraph-width; // ~70 characters per line
+    }
+}
+
+
+// Modifiers
+// -------------------------
+
+.jungerino-uppercase {
+
+    $uppercase-font-size-ems: emy($font-size-base-px - 2px); // 0.875em
+
+    font-size: $uppercase-font-size-ems; 
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+.jungerino-label {
+    font-size: 0.75em;
+    font-weight: 500; // Medium
+    margin: 0.5em 0;
+}
+
+.jungerino-caption {
+    font-size: 0.85em;
+    line-height: 1.4;
+}

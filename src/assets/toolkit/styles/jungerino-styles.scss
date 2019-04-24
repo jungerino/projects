@@ -1,0 +1,44 @@
+// --------------------------------------------------
+// Base styles
+// --------------------------------------------------
+
+// Variables & Functions
+@import './vendor/bootstrap4/functions';
+@import './jungerino/functions';
+@import './jungerino/variables'; // Depends on jungerino/functions
+@import './vendor/bootstrap4/variables'; // Bootstrap variables go last
+
+// Remove unwanted Bootstrap theme colors
+$theme-colors: map-remove($theme-colors, 'secondary', 'info', 'warning', 'light', 'dark');
+
+// Bootstrap 4
+@import './vendor/bootstrap4/mixins';
+@import './vendor/bootstrap4/reboot';
+@import './vendor/bootstrap4/button-group';
+@import './vendor/bootstrap4/buttons';
+@import './vendor/bootstrap4/card';
+@import './vendor/bootstrap4/dropdown';
+@import './vendor/bootstrap4/forms';
+@import './vendor/bootstrap4/grid';
+@import './vendor/bootstrap4/nav';
+@import './vendor/bootstrap4/navbar';
+@import './vendor/bootstrap4/popover';
+@import './vendor/bootstrap4/tooltip';
+@import './vendor/bootstrap4/type';
+@import './vendor/bootstrap4/utilities';
+
+// Jungerino
+@import './jungerino/mixins';
+@import './jungerino/boxes';
+@import './jungerino/buttons';
+@import './jungerino/card';
+@import './jungerino/contexts';
+@import './jungerino/fonts';
+@import './jungerino/inputs';
+@import './jungerino/messaging';
+@import './jungerino/menus';
+@import './jungerino/nav';
+@import './jungerino/scaffolding';
+@import './jungerino/shadows';
+@import './jungerino/tabs';
+@import './jungerino/type';

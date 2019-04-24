@@ -1,0 +1,100 @@
+// --------------------------------------------------
+// Messaging
+// --------------------------------------------------
+
+
+.notification {
+    $notification-spacer-y: $em-space-s;
+    $notification-spacer-x: $em-space;
+    $icon-target-px: 24px;
+    $icon-target: emy($icon-target-px);
+
+    align-items: center;
+    border-radius: $border-radius;
+    display: flex;
+    max-width: $paragraph-width + $icon-target * 2 + $notification-spacer-x * 2 + $em-space-s;
+    padding: $notification-spacer-y $notification-spacer-x;
+
+    &.notification-error {
+        background-color: $messaging-yellow-tint;
+
+        // Icon
+        svg {
+            color: $white;
+            fill: $messaging-yellow;
+        }
+    }
+
+    &.notification-info {
+        background-color: $messaging-blue-tint;
+
+        // Icon
+        svg {
+            color: $white;
+            fill: $messaging-blue;
+        }
+    }
+
+    &.notification-warning {
+        background-color: $messaging-red-tint;
+
+        // Icon
+        svg {
+            color: $white;
+            fill: $messaging-red;
+        }
+    }
+
+    &.notification-success {
+        background-color: $messaging-green-tint;
+
+        // Icon
+        svg {
+            color: $white;
+            fill: $messaging-green;
+        }
+    }
+
+    &.notification-stationary {
+        $border-bottom-px: 2px;
+        $border-bottom: emy($border-bottom-px);
+
+        background: none;
+        border-bottom: $border-bottom solid $gray-2;
+        border-radius: 0;
+        max-width: 100%;
+    }
+
+    div {
+        color: $text-color;
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        margin: 0 $em-space-s;
+
+        p {
+            margin: 0;
+
+            &:first-child {
+                font-weight: 700; // Bold
+                padding-right: $em-space-xxs;
+            }
+        }  
+    }
+
+    svg {
+        flex: 0 0 $icon-target;
+        height: $icon-target;
+        width: $icon-target;
+    }
+
+    button {
+        flex: 0 0 $icon-target; 
+        height: $icon-target;
+        width: $icon-target;
+
+        i {
+            font-size: 1em; //override default icon size
+        }   
+    }
+}

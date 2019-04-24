@@ -1,0 +1,336 @@
+// --------------------------------------------------
+// Demo Pages
+// --------------------------------------------------
+
+
+@import "../jungerino/shadows";
+
+
+// Context demos
+// --------------------------------------------------
+
+.demo-layout-contexts {
+
+    // Context labels
+    // -------------------------
+
+    %context-label {
+        border-bottom: 1px solid $gray-3;
+        color: $text-color-light;
+        display: block;
+        font-size: remy(11);
+        font-weight: 500; // Medium
+        margin-bottom: $em-space-l;
+        padding: $em-space-xxs;
+        pointer-events: none;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .demo-context {
+        position: relative;
+    }
+
+    .layout-context-main {
+
+        // Context label (for demo)
+        &:before {
+
+            @extend %context-label;
+
+            content: 'Main Column';
+        }
+    }
+
+    .layout-context-narrow {
+
+        // Context label (for demo)
+        &:before {
+
+            @extend %context-label;
+
+            content: 'Narrow Column';
+        }
+    }
+
+    .layout-context-full {
+
+        // Context label (for demo)
+        &:before {
+
+            @extend %context-label;
+
+            content: 'Full Width';
+
+        }
+    }
+
+    // Element Labels
+    // -------------------------
+
+    * {
+
+        &:after {
+            font-family: monospace;
+            // font-size: 0.8em;
+            font-weight: 400;
+            margin-left: $em-space-xs;
+            opacity: 0.4;
+            // text-transform: uppercase;
+        }
+    }
+
+    p {
+        &:after {
+            content: '<p>';
+        }
+    }
+
+    h1 {
+        &:after {
+            content: '<h1>';
+        }
+    }
+
+    h2 {
+        &:after {
+            content: '<h2>';
+        }
+    }
+
+    h3 {
+        &:after {
+            content: '<h3>';
+        }
+    }
+
+    h4 {
+        &:after {
+            content: '<h4>';
+        }
+    }
+
+    h5 {
+        &:after {
+            content: '<h5>';
+        }
+    }
+
+    .jungerino-caption {
+        &:after {
+            content: 'class="jungerino-caption"';
+        }
+    }
+
+    .jungerino-label {
+        &:after {
+            content: 'class="jungerino-label"';
+        }
+    }
+}
+
+
+// State switcher
+// --------------------------------------------------
+
+.demo-switcher {
+
+    @extend %shadow-basic;
+
+    @include translate-x-center;
+
+    background-color: $white;
+    display: flex;
+    height: $btn-input-height;
+    line-height:  $btn-input-height;
+    position: absolute;
+    top: remy(10);
+
+    a {
+        border-right: 1px solid $gray-2;
+        justify-content: center;
+        flex: 0 0 auto;
+        font-size: remy(15);
+        font-weight: 500; // Medium
+        padding: 0 $em-space;
+
+        &.active {
+            background-color: $gray-2;
+            color: $text-color;
+            pointer-events: none;
+        }
+    }
+}
+
+    
+// Breakpoint display
+// --------------------------------------------------
+
+.demo-breakpoints {
+    $height: remy(50);
+
+    @include material-shadow(2, 0.5); // Depth, strength, color (optional)
+
+    background-color: $white;
+    bottom: remy(20);
+    display: flex;
+    font-family: open-sans;
+    font-size: remy(15);
+    font-weight: 500; // Medium
+    height: $height;
+    left: remy(20);
+    position: fixed;
+    transition: all 0.15s ease-in-out;
+    z-index: 20;
+
+    > div {
+        border-right: 1px solid $gray-2;
+        display: flex;
+        justify-content: center;
+        font-weight: 500; // Medium
+        flex-direction: column;
+        line-height: 1;
+        padding: 0 $em-space;
+    }
+
+    .demo-breakpoint-size {
+        align-items: center;
+        color: $text-color-light;
+        font-size: remy(24);
+        font-weight: 200; // Light
+        text-transform: uppercase;
+    }
+
+    .demo-breakpoint-label {
+        color: $text-color-light;
+        font-size: remy(10);
+        font-weight: 300; // Book
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5em;
+        text-transform: uppercase;
+    }
+
+    .demo-breakpoint-grid {
+        align-items: center;
+        font-size: remy(13);
+        padding: 0;
+        width: remy(96);
+    }
+}
+
+
+// Grid display
+// --------------------------------------------------
+
+.demo-grid {
+    display: none;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    .container {
+        height: 100%;
+    }
+
+    .col {
+        border: 0 solid rgba($messaging-blue, 0.75);
+        border-right-width: 1px;
+        border-bottom: 0;
+        border-top: 0;
+
+        &:first-of-type {
+            border-left-width: 1px;
+        }
+    }
+}
+
+
+// Controls
+// --------------------------------------------------
+
+.demo-size-control {
+    @extend %shadow-basic;
+
+    background-color: tint($gray-1, 80%);
+    line-height: $em-space-xxxl;
+    margin-bottom: $em-space-l;
+    // padding: $em-space-xs;
+
+    > * {
+        vertical-align: middle;
+    }
+
+    input {
+        margin-left: $em-space;
+    }
+
+    span {
+        font-weight: 500; // Medium
+    }
+}
+
+
+// Color tiles
+// -------------------------
+
+.demo-color-tiles {
+
+    @include clearfix();
+
+    display: block;
+    margin: 0 remy(-15);
+}
+
+.demo-color-tile {
+    @extend %shadow-basic;
+
+
+    border-top-width: 8em;
+    border-top-style: solid;
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    background-color: #fff;
+    display: block;
+    float: left;
+    font-weight: 700;
+    font-size: 0.75em;
+    margin: remy(15);
+    padding: 1em;
+    width: remy(260);
+
+    .demo-color-tile__color {
+        background-color: #fff;
+        color: $text-color-light;
+        font-size: remy(15);
+        font-weight: 400;
+    }
+
+    .demo-color-tile__name {
+        font-family: open-sans;
+        font-size: remy(15);
+        font-weight: 500; // Medium
+    }
+}
+
+// Styles to show single-select menu
+// -------------------------
+
+.single-select-demo {
+
+    &.open {
+
+        ul {
+            display: block;
+        }
+
+        button {
+            
+            &:after {
+                top: 0.5em;
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

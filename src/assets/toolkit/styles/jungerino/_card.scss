@@ -1,0 +1,45 @@
+// --------------------------------------------------
+// Cards
+// --------------------------------------------------
+
+.card {
+    @extend %shadow-basic;
+}
+
+.card-title {
+    font-size: 1.5em;
+    font-weight: 500; // Medium
+    text-transform: none; // override h5 default
+}
+
+.card-label {
+    $icon-size: 24; // Icon is 24px when body is 16px
+    $label-size: 11; // Label is 11px when body is 16px
+
+    font-size: emy($label-size);
+    font-weight: 700; // Bold
+    line-height: emy($icon-size, $label-size);
+    text-transform: uppercase;
+
+    i {
+        display: inline-block;
+        font-size: emy($icon-size, $label-size);
+        margin-right: $em-space-xxxs;
+        vertical-align: top;
+    }
+
+    &.label-red {
+        color: $messaging-red;
+    }
+}
+
+.card-heading {
+    font-size: emy(18);
+    font-weight: 700; // Bold
+    margin: 0 0 $em-space-xxs; // Override default <h3> margin
+}
+
+.card-actions {
+    background-color: $gray-1;
+    text-align: right;
+}

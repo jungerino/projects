@@ -1,0 +1,554 @@
+// sass-lint:disable no-color-literals
+
+
+
+// Shadowbox
+// --------------------------------------------------
+
+// Generate parallax layer transforms
+@mixin parallax-transforms($parallax-layers, $parallax-amount) {
+    @for $i from 0 through $parallax-layers {
+        $distance: ($parallax-amount * -1) * ($parallax-layers - $i);
+        .parallax-layer-#{$i}{
+
+            // 'translateZ' moves successive layers further back
+            // 'scale' provides depth correction (so layers don't get smaller in the distance)
+            transform: translateZ($distance);
+        }
+    }
+}
+
+
+
+// Buttons
+// --------------------------------------------------
+
+// Arguments:
+// 1. Font color
+// 2. Font color :hover
+// 3. Background color
+// 4. Background color :hover
+// 5. Border color
+// 6. Border color :hover
+
+@mixin btn-jungerino($font-color: $white, $font-color-hover: $white, $background: $primary, $background-hover: $primary-darker, $border-color: transparent, $border-color-hover: transparent) {
+    background-color: $background;
+    border-color: $border-color;
+    color: $font-color;
+    // text-shadow: 0 1px 0 rgba($black, 0.3), 0 0 2px rgba($black, 0.2); // May be useful in the future
+
+    &:focus,
+    &:hover {
+        background-color: $background-hover;
+        border-color: $border-color-hover;
+        color: $font-color-hover;
+        outline: none;
+    }
+
+    &:active,
+    &.active {
+        background-color: darken($background-hover, 10%);
+        box-shadow: none;
+    }
+}
+
+// From target height, derive font-size and line height
+@mixin btn-fixed-height($height) {
+    $height-rems: remy($height); // Rems because we want the size to be independent of context
+    $font-size-rems: $height-rems * $btn-input-font-size-ratio;
+    $border-width-total: ($height-rems * $btn-input-height-border-ratio) * 2;
+
+    font-size: $font-size-rems;
+    height: $height-rems;
+    line-height: $height-rems - $border-width-total; // Adjusted for border thickness
+}
+
+
+// Disabled State
+// --------------------------------------------------
+
+@mixin disabled-state($opacity) {
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: $opacity;
+    pointer-events: none;
+}
+
+
+// Shadows
+// --------------------------------------------------
+
+// Mixin lifted from https://codepen.io/dbox/pen/RawBEW
+
+//- Mixin: Material Shadow
+///
+/// Box shadows based on 5 Material Design presets;
+///
+/// @param {variable} $z-depth [1] - shadow distance on z-axis
+/// @param {variable} $strength [1] - multiplier for shadow strength/darkness
+/// @param {variable} $color [1] - shadow color
+/// @group layout
+/// @example
+///   div {
+///     @include material-shadow(3);
+///   }
+
+@mixin material-shadow($z-depth: 1, $strength: 1, $color: $black) {
+    @if $z-depth==1 {
+        box-shadow: 0 1px 3px rgba($color, $strength * 0.14), 0 1px 2px rgba($color, $strength * 0.24);
+    }
+    @if $z-depth==2 {
+        box-shadow: 0 3px 6px rgba($color, $strength * 0.16), 0 3px 6px rgba($color, $strength * 0.23);
+    }
+    @if $z-depth==3 {
+        box-shadow: 0 10px 20px rgba($color, $strength * 0.19), 0 6px 6px rgba($color, $strength * 0.23);
+    }
+    @if $z-depth==4 {
+        box-shadow: 0 15px 30px rgba($color, $strength * 0.25), 0 10px 10px rgba($color, $strength * 0.22);
+    }
+    @if $z-depth==5 {
+        box-shadow: 0 20px 40px rgba($color, $strength * 0.3), 0 15px 12px rgba($color, $strength * 0.22);
+    }
+    @if ($z-depth < 1) or ($z-depth > 5) {
+        @warn '$z-depth must be between 1 and 5';
+    }
+}
+
+
+// Centering
+// --------------------------------------------------
+
+// Method of centering
+// Requires width and height arguments
+@mixin absolute-center($width, $height) {
+    display: block;
+    height: $height;
+    left: 50%;
+    margin-left: -($width / 2);
+    margin-top: -($height / 2);
+    position: absolute;
+    top: 50%;
+    width: $width;
+}
+
+@mixin horizontal-center($width) {
+    display: block;
+    left: 50%;
+    margin-left: -($width / 2);
+    position: absolute;
+    width: $width;
+}
+
+// Easier method of centering
+// Don't use directly on SVGs because it makes them break in some browsers
+@mixin translate-center() {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin translate-y-center() {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin translate-x-center() {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+// Form Elements
+// --------------------------------------------------
+
+// Custom Checkbox
+@mixin jungerino-checkbox($border-color, $border-color-hover, $background-color, $background-color-checked, $checkbox-size, $checkmark-color, $border-radius, $border-thickness) {
+
+    // The label is the clickable element
+    label {
+        cursor: pointer;
+        margin: 0; // Override Bootstrap default
+        position: relative;
+        user-select: none;
+
+        &:hover,
+        &:focus {
+
+            input {
+
+                &:not(:checked) + div {
+                    border: $border-thickness solid $border-color-hover;
+                }
+            }
+        }
+    }
+
+    input {
+        margin: 0;
+        opacity: 0; // hide the input
+        padding: 0;
+        position: absolute; // take it out of the document flow
+
+        // The checkbox
+        + .checkbox-div {
+            background-color: $background-color;
+            border: $border-thickness solid $border-color;
+            border-radius: $border-radius;
+            float: left;
+            height: $checkbox-size;
+            margin-right: $em-space-s;
+            width: $checkbox-size;
+        }
+
+        &:checked + div {
+            background-color: $background-color-checked;
+
+            // The check mark
+            // Based on this svg: /src/assets/toolkit/svg/cfer/icon-20px-checkbox-check.svg
+            // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+            // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='#{url-friendly-colour($checkmark-color)}'%20d='M7.88%2014.91l-3.91-4.05%201.44-1.39%202.47%202.56%206.71-6.94%201.44%201.39-8.15%208.43'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+            border: 0;
+        }
+
+        &:focus {
+
+            + .checkbox-div {
+                box-shadow: 0 0 0 0.2rem $input-btn-focus-color;
+            }
+        }
+    }
+}
+
+// Checkbox with dash indicating partial selection state, used in conjunction with @mixin jungerino-checkbox
+@mixin jungerino-checkbox-partial($dash-color) {
+
+    input {
+        &:checked + div {
+
+            // The dash
+            // Based on this svg: /src/assets/toolkit/svg/cfer/icon-20px-checkbox-dash.svg
+            // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+            // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='#{url-friendly-colour($dash-color)}'%20d='M4%209h12v2H4z'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+        }
+    }
+}
+
+// Checkbox with delete selection state, used in conjunction with @mixin jungerino-checkbox
+@mixin jungerino-checkbox-delete($dash-color) {
+
+    input {
+        &:checked + div {
+
+            // The dash
+            // Based on this svg: /src/assets/toolkit/svg/cfer/icon-24px-checkbox-x.svg
+            // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+            // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+            background-color: $messaging-red;
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='#{url-friendly-colour($dash-color)}'%20d='M16%205.2L11.2%2010l4.8%204.8-1.2%201.2-4.8-4.8L5.2%2016%204%2014.8%208.8%2010%204%205.2%205.2%204%2010%208.8%2014.8%204%2016%205.2z'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+        }
+    }
+}
+
+
+// Custom radio button
+
+// Mixin arguments:
+// 1. radio btn size
+// 2. dot color
+// 3. border color
+// 4. border thickness
+// 5. border hover color
+// 6. background color
+
+@mixin jungerino-radio-btn($radio-btn-size, $dot-color, $border-color, $border-thickness, $border-hover-color, $background-color) {
+
+    $dot-size: $radio-btn-size * .45;
+
+    // The label is the clickable element
+    label {
+        cursor: pointer;
+        line-height: $radio-btn-size;
+        margin: 0; // Override Bootstrap default
+        position: relative;
+        user-select: none;
+
+        &:hover,
+        &:focus {
+
+            input {
+
+                & + div {
+                    border: $border-thickness solid $border-hover-color;
+                }
+            }
+        }
+    }
+
+    input {
+        margin: 0;
+        opacity: 0; // hide the input
+        padding: 0;
+        position: absolute; // take it out of the document flow
+
+        // The visible div next to the input
+
+        + .radio-div {
+            align-content: center;
+            align-items: center;
+            background-color: $background-color;
+            border: $border-thickness solid $border-color;
+            border-radius: 50%;
+            display: flex;
+            float: left;
+            height: $radio-btn-size;
+            justify-content: center;
+            margin-right: $em-space-s;
+            width: $radio-btn-size;
+        }
+
+        &:checked + div {
+
+            &:after {
+                @include translate-y-center();
+                
+                background-color: $dot-color;
+                border: 0;
+                border-radius: 50%;
+                content: '';
+                display: block;
+                height: $dot-size;
+                position: absolute;
+                width: $dot-size;
+            }
+        }
+
+        &:focus {
+
+            + .radio-div {
+                box-shadow: $input-btn-focus-box-shadow;
+            }
+        }
+    }
+}
+
+// A mixin for the arrow that appears in buttons / links
+// --------------------------------------------------
+@mixin menuarrow() {
+
+    &::after {
+        @include translate-y-center();
+
+        // The down arrow
+        // Based on this svg: /src/assets/toolkit/svg/cfer/icon-24px-dropdown-arrow.svg
+        // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+        // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='#{url-friendly-colour($arrow-color)}'%20d='M7%2010h10l-5%205z'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+        display: block;
+        position: absolute;
+    }
+}
+
+
+// Dropdown Menu
+// --------------------------------------------------
+
+@mixin dropdown-menu($border-color, $hover-color, $shadow, $border-radius, $font-family, $font-size, $line-height, $arrow-color) {
+
+    ul {
+        background-clip: padding-box;
+        background-color: $white;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        float: left;
+        font-family: $font-family;
+        font-size: $font-size;
+        line-height: $line-height;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        user-select: none;
+        z-index: 1000;
+
+        &:focus {
+            outline: 0;
+        }
+
+        li {
+
+            &:not(.vamp-select-group) {
+
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+
+            &:first-child {
+                padding-top: 7px;
+            }
+        }
+    }
+
+    > button {
+        &::after {
+            @include translate-y-center();
+
+            // The down arrow
+            // Based on this svg: /src/assets/toolkit/svg/cfer/icon-24px-dropdown-arrow.svg
+            // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+            // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='#{url-friendly-colour($arrow-color)}'%20d='M7%2010h10l-5%205z'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+            display: block;
+            position: absolute;
+        }
+    }
+
+    &.open {
+
+        > button {
+
+            &::after {
+                //margin-top: -10px;
+                transform: rotate(180deg);
+            }
+        }
+
+    }
+}
+
+// This is a CSS arrow that points off an element
+// --------------------------------------------------
+
+@mixin pointer-arrow($top-value, $text, $border-color) {
+
+    // CSS Arrow Please generated
+
+    &::after,
+    &::before {
+        border: solid transparent;
+        content: '';
+        height: 0;
+        max-height: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 100px;
+        top: $top-value;
+        width: 0;
+        z-index: 2;
+    }
+
+    &::after {
+        border-bottom-color: $text;
+        border-width: 10px;
+        margin-left: -10px;
+        margin-top: 2px;
+    }
+
+    &::before {
+        border-bottom-color: $border-color;
+        border-width: 11px;
+        margin-left: -11px;
+    }
+
+}
+
+
+// Text
+// --------------------------------------------------
+
+// Truncate
+@mixin truncate () {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Side-scrolling Truncation
+@mixin scrolling-text ($width) {
+    overflow: hidden;
+    position: relative;
+    width: $width;
+
+    span {
+        min-width: $width;
+        overflow: hidden;
+        position: absolute;
+        text-overflow: ellipsis;
+        transform: translateX(0);
+        transition: .6s;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    &:hover {
+        span {
+            transform: translateX(calc(#{$width} - 100%));
+            width: auto;
+        }
+    }
+}
+
+
+// Background Noise
+// --------------------------------------------------
+
+// Background image to add noise to solid colors
+%noisy {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg=="); // sass-lint:disable-line quotes
+}
+
+// ARCHIVE
+// (To be deleted eventually)
+// --------------------------------------------------
+
+@mixin btn-solid($text, $background) {
+    background-color: $background;
+    border-color: mix($black, $background, 15%);
+    color: $text;
+    text-shadow: 0 1px 0 rgba($black, 0.3), 0 0 2px rgba($black, 0.2);
+
+    &:focus,
+    &:hover {
+        background-color: mix($black, $background, 15%);
+        border-color: mix($black, $background, 30%);
+        color: $text;
+        outline: none;
+    }
+
+    &:active,
+    &.active {
+        background-color: mix($black, $background, 30%);
+        box-shadow: none;
+    }
+}
+
+@mixin btn-outline($color) {
+    background-color: transparent;
+    border-color: $color;
+    box-shadow: none;
+    color: $color;
+
+    &:focus,
+    &:hover {
+        background-color: $color;
+        color: $white;
+    }
+
+    &:active,
+    &.active {
+        background-color: mix($black, $color, 30%);
+        border-color: mix($black, $color, 30%);
+    }
+}
+
+@mixin btn-raised($background) {
+    box-shadow: 0 2px 0 0 mix($black, $background, 30%);
+
+    &:focus,
+    &:hover {
+        box-shadow: 0 2px 0 0 mix($black, $background, 40%);
+    }
+}

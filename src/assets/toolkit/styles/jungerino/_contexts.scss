@@ -1,0 +1,143 @@
+// --------------------------------------------------
+// Layout Contexts (responsive font & heading sizes)
+// --------------------------------------------------
+
+
+// Main column
+.responsive-context-main {
+
+    // Responsive type
+    @include media-breakpoint-up(md) {
+        font-size: remy(18);
+    }
+
+    @include media-breakpoint-up(lg) {
+        font-size: remy(18);
+    }
+
+    @include media-breakpoint-up(xl) {
+        font-size: remy(19);
+    }
+
+    @include media-breakpoint-up(xxl) {
+        font-size: remy(19);
+    }
+
+    font-size: remy(17);
+
+    // Headings
+    h1 {
+        font-size: $h1-size-main;
+    }
+
+    h2 {
+        font-size: $h2-size-main;
+    }
+
+    h3 {
+        font-size: $h3-size-main;
+    }
+
+    h4 {
+        font-size: $h4-size-main;
+    }
+
+    h5 {
+        font-size: $h5-size-main;
+    }
+}
+
+// Narrow column
+.responsive-context-narrow {
+
+    // Responsive type
+    @include media-breakpoint-up(xl) {
+        font-size: remy(15);
+    }
+
+    @include media-breakpoint-up(xxl) {
+        font-size: remy(16);
+    }
+
+    font-size: remy(14);
+    line-height: $line-height-narrow;
+
+    // Headings
+    h1 {
+        font-size: $h1-size-narrow;
+        font-weight: 500; // Medium
+    }
+
+    h2 {
+        font-size: $h2-size-narrow;
+        font-weight: 500; // Medium
+    }
+
+    h3 {
+        font-size: $h3-size-narrow;
+        font-weight: 400; // Regular
+    }
+
+    h4 {
+        font-size: $h4-size-narrow;
+    }
+
+    h5 {
+        font-size: $h5-size-narrow;
+    }
+}
+
+// Full width
+.responsive-context-full {
+
+    // Responsive type
+    @include media-breakpoint-up(md) {
+        font-size: remy(18);
+    }
+
+    @include media-breakpoint-up(lg) {
+        font-size: remy(19);
+    }
+
+    @include media-breakpoint-up(xl) {
+        font-size: remy(20);
+    }
+
+    @include media-breakpoint-up(xxl) {
+        font-size: remy(21);
+    }
+
+    font-size: remy(17);
+}
+
+// Force 'narrow' headings at xs size (all contexts)
+[class^='responsive-context-'],
+[class*=' responsive-context-'] {
+    @include media-breakpoint-down(xs) {
+
+        h1 {
+            font-size: $h1-size-narrow;
+            font-weight: $h1-weight-narrow;
+        }
+
+        h2 {
+            font-size: $h2-size-narrow;
+            font-weight: $h2-weight-narrow;
+        }
+
+        h3 {
+            font-size: $h3-size-narrow;
+            font-weight: $h3-weight-narrow;
+        }
+
+        h4 {
+            font-size: $h4-size-narrow;
+            font-weight: $h4-weight-narrow;
+        }
+
+        h5 {
+            font-size: $h5-size-narrow;
+            font-weight: $h5-weight-narrow;
+        }
+    }
+}

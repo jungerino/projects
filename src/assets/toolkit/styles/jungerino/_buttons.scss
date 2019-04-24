@@ -1,0 +1,170 @@
+// --------------------------------------------------
+// Buttons
+// --------------------------------------------------
+
+
+// Default
+// --------------------------------------------------
+
+.btn {
+    @include btn-jungerino;
+
+    border: $btn-input-border-width solid transparent;
+    border-radius: $border-radius;
+    font-family: $btn-input-font;
+    font-size: 1em; // Bootstrap override
+    height: $btn-input-height;
+    line-height: $btn-input-height - ($btn-input-border-width * 2); // Adjusted for border thickness (top & bottom)
+    padding: 0 $btn-input-x-padding;
+    position: relative;
+
+    // sass-lint:disable-block force-attribute-nesting no-qualifying-elements quotes
+    // TO DO: decide if these lint rules are necessary
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+
+            @include disabled-state(.5); // ($opacity)
+        }
+    }
+
+    // Icon in a button
+    i {
+        display: inline-block;
+        font-size: emy(24px); // 24px is the base size of icons
+        line-height: inherit;
+        margin: 0 $em-space-xxs 0 0;
+        vertical-align: top;
+
+        // Flip the margin for icons to the right of a label
+        &.btn-icon-right {
+            margin: 0 0 0 $em-space-xxs;
+        }
+    }
+
+    // Default margin between inline buttons
+    + .btn {
+        margin-left: $btn-input-x-padding;
+    }
+}
+
+
+// Variations
+// -------------------------
+
+// btn-jungerino arguments and defaults:
+// 1. $font-color: $white
+// 2. $font-color-hover: $white
+// 3. $background: $primary
+// 4. $background-hover: darken($primary, 15%)
+// 5. $border-color: transparent
+// 6. $border-color-hover: transparent
+
+.btn-oval {
+    border-radius: $btn-input-oval-radius; // Height divided by 2
+    padding: 0 $em-space-l; // Extra x padding for oval buttons
+}
+
+.btn-secondary {
+    @include btn-jungerino($text-color, $text-color, transparent, transparent, $gray-3, $primary);
+}
+
+.btn-ghost {
+    @include btn-jungerino($text-color, $text-color, transparent, $btn-ghost-hover, transparent, transparent);
+
+    font-weight: 500; // Medium
+}
+
+.btn-ghost-alt {
+    @include btn-jungerino($text-color, $primary, transparent, transparent, transparent, transparent);
+
+    font-weight: 500; // Medium
+}
+
+.btn-special {
+    @include btn-jungerino($white, $white, $jungerino-orange, darken($jungerino-orange, 15%), transparent, transparent);
+
+    border-radius: $btn-input-oval-radius; // Height divided by 2
+    font-size: emy(21px);
+    font-weight: 500; // Medium
+    padding: 0 $em-space-xl;
+}
+
+.btn-icon-ghost {
+    @include btn-jungerino($text-color, $text-color, transparent, $btn-ghost-hover, transparent, transparent);
+
+    border-radius: $btn-input-oval-radius; // Height divided by 2
+    padding: 0;
+    width: $btn-input-height;
+
+    label {
+        $font-size-px: 10px;
+        $font-size: emy($font-size-px);
+        $label-height-px: 18px;
+        $label-height: emy($label-height-px, $font-size-px);
+        $label-top-margin: $em-space-xxs;
+        $label-context-adjust: $font-size-base-px / $font-size-px; // So label can be positioned relative to baseline
+        $label-top-position: ($btn-input-height + $label-top-margin) * $label-context-adjust; // Height of the button plus the space between button and label, adjsuted for context
+
+        @include translate-x-center();
+
+        background-color: $text-color-light;
+        border-radius: remy(1px);
+        color: $white;
+        display: inline-block;
+        font-size: $font-size;
+        font-weight: 500; // Medium
+        height: $label-height;
+        line-height: $label-height;
+        padding: 0 $em-space-xs;
+        position: absolute;
+        text-transform: uppercase;
+        top: $label-top-position;
+        visibility: hidden;
+    }
+
+    i {
+        @include translate-center();
+
+        display: block;
+        position: absolute;
+    }
+
+    &:hover,
+    &:focus {
+
+        label {
+            visibility: visible;
+        }
+    }
+}
+
+
+// Fixed height buttons (independent of context)
+// -------------------------
+
+.btn-small {
+    @include btn-fixed-height(34px); // Calculate font-size, etc. from target height
+}
+
+.btn-medium {
+    @include btn-fixed-height(40px); // Calculate font-size, etc. from target height
+}
+
+.btn-touch {
+    @include btn-fixed-height(44px); // Calculate font-size, etc. from target height
+}
+
+.btn-large {
+    @include btn-fixed-height(50px); // Calculate font-size, etc. from target height
+}
+
+.btn-jumbo {
+    @include btn-fixed-height(60px); // Calculate font-size, etc. from target height
+}

@@ -1,0 +1,173 @@
+// --------------------------------------------------
+// Fonts
+// --------------------------------------------------
+
+// Font weights and styles are set using the "Style Linking" method:
+// https://www.smashingmagazine.com/2013/02/setting-weights-and-styles-at-font-face-declaration/#style-linking
+
+
+// sass-lint:disable no-duplicate-properties
+ 
+
+// Icons
+// --------------------------------------------------
+
+@font-face {
+    font-family: 'icons-material';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/icons-material/icons-material.eot');
+    src: url('../fonts/icons-material/icons-material.eot?#iefix') format('embedded-opentype'), url('../fonts/icons-material/icons-material.woff') format('woff'), url('../fonts/icons-material/icons-material.ttf') format('truetype'), url('../fonts/icons-material/icons-material.svg') format('svg');
+}
+
+
+// Open Sans
+// --------------------------------------------------
+
+// Light
+@font-face {
+    font-family: 'open-sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/open-sans-light/open-sans-light.eot');
+    src: url('../fonts/open-sans-light/open-sans-light.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-light/open-sans-light.woff') format('woff'), url('../fonts/open-sans-light/open-sans-light.ttf') format('truetype'), url('../fonts/open-sans-light/open-sans-light.svg') format('svg');
+}
+
+// Regular
+@font-face {
+    font-family: 'open-sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/open-sans-regular/open-sans-regular.eot');
+    src: url('../fonts/open-sans-regular/open-sans-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-regular/open-sans-regular.woff') format('woff'), url('../fonts/open-sans-regular/open-sans-regular.ttf') format('truetype'), url('../fonts/open-sans-regular/open-sans-regular.svg') format('svg');
+}
+
+// Italic
+@font-face {
+    font-family: 'open-sans';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/open-sans-italic/open-sans-italic.eot');
+    src: url('../fonts/open-sans-italic/open-sans-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-italic/open-sans-italic.woff') format('woff'), url('../fonts/open-sans-italic/open-sans-italic.ttf') format('truetype'), url('../fonts/open-sans-italic/open-sans-italic.svg') format('svg');
+}
+
+// Semi-bold
+@font-face {
+    font-family: 'open-sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/open-sans-semi-bold/open-sans-semi-bold.eot');
+    src: url('../fonts/open-sans-semi-bold/open-sans-semi-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-semi-bold/open-sans-semi-bold.woff') format('woff'), url('../fonts/open-sans-semi-bold/open-sans-semi-bold.ttf') format('truetype'), url('../fonts/open-sans-semi-bold/open-sans-semi-bold.svg') format('svg');
+}
+
+// Semi-bold italic
+@font-face {
+    font-family: 'open-sans';
+    font-style: italic;
+    font-weight: 600;
+    src: url('../fonts/open-sans-semi-bold-italic/open-sans-semi-bold-italic.eot');
+    src: url('../fonts/open-sans-semi-bold-italic/open-sans-semi-bold-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-semi-bold-italic/open-sans-semi-bold-italic.woff') format('woff'), url('../fonts/open-sans-semi-bold-italic/open-sans-semi-bold-italic.ttf') format('truetype'), url('../fonts/open-sans-semi-bold-italic/open-sans-semi-bold-italic.svg') format('svg');
+}
+
+// Bold
+@font-face {
+    font-family: 'open-sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/open-sans-bold/open-sans-bold.eot');
+    src: url('../fonts/open-sans-bold/open-sans-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-bold/open-sans-bold.woff') format('woff'), url('../fonts/open-sans-bold/open-sans-bold.ttf') format('truetype'), url('../fonts/open-sans-bold/open-sans-bold.svg') format('svg');
+}
+
+// Bold italic
+@font-face {
+    font-family: 'open-sans';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/open-sans-bold-italic/open-sans-bold-italic.eot');
+    src: url('../fonts/open-sans-bold-italic/open-sans-bold-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-bold-italic/open-sans-bold-italic.woff') format('woff'), url('../fonts/open-sans-bold-italic/open-sans-bold-italic.ttf') format('truetype'), url('../fonts/open-sans-bold-italic/open-sans-bold-italic.svg') format('svg');
+}
+
+// Extra bold
+@font-face {
+    font-family: 'open-sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/open-sans-extra-bold/open-sans-extra-bold.eot');
+    src: url('../fonts/open-sans-extra-bold/open-sans-extra-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/open-sans-extra-bold/open-sans-extra-bold.woff') format('woff'), url('../fonts/open-sans-extra-bold/open-sans-extra-bold.ttf') format('truetype'), url('../fonts/open-sans-extra-bold/open-sans-extra-bold.svg') format('svg');
+}
+
+
+// Roboto
+// --------------------------------------------------
+
+// Light
+@font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/roboto-light/roboto-light.eot');
+    src: url('../fonts/roboto-light/roboto-light.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-light/roboto-light.woff') format('woff'), url('../fonts/roboto-light/roboto-light.ttf') format('truetype'), url('../fonts/roboto-light/roboto-light.svg') format('svg');
+}
+
+// Light italic
+@font-face {
+    font-family: 'roboto';
+    font-style: italic;
+    font-weight: 200;
+    src: url('../fonts/roboto-light-italic/roboto-light-italic.eot');
+    src: url('../fonts/roboto-light-italic/roboto-light-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-light-italic/roboto-light-italic.woff') format('woff'), url('../fonts/roboto-light-italic/roboto-light-italic.ttf') format('truetype'), url('../fonts/roboto-light-italic/roboto-light-italic.svg') format('svg');
+}
+
+// Regular
+@font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/roboto-regular/roboto-regular.eot');
+    src: url('../fonts/roboto-regular/roboto-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-regular/roboto-regular.woff') format('woff'), url('../fonts/roboto-regular/roboto-regular.ttf') format('truetype'), url('../fonts/roboto-regular/roboto-regular.svg') format('svg');
+}
+
+// Italic
+@font-face {
+    font-family: 'roboto';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/roboto-italic/roboto-italic.eot');
+    src: url('../fonts/roboto-italic/roboto-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-italic/roboto-italic.woff') format('woff'), url('../fonts/roboto-italic/roboto-italic.ttf') format('truetype'), url('../fonts/roboto-italic/roboto-italic.svg') format('svg');
+}
+
+// Medium
+@font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/roboto-medium/roboto-medium.eot');
+    src: url('../fonts/roboto-medium/roboto-medium.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-medium/roboto-medium.woff') format('woff'), url('../fonts/roboto-medium/roboto-medium.ttf') format('truetype'), url('../fonts/roboto-medium/roboto-medium.svg') format('svg');
+}
+
+// Medium italic
+@font-face {
+    font-family: 'roboto';
+    font-style: italic;
+    font-weight: 500;
+    src: url('../fonts/roboto-medium-italic/roboto-medium-italic.eot');
+    src: url('../fonts/roboto-medium-italic/roboto-medium-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-medium-italic/roboto-medium-italic.woff') format('woff'), url('../fonts/roboto-medium-italic/roboto-medium-italic.ttf') format('truetype'), url('../fonts/roboto-medium-italic/roboto-medium-italic.svg') format('svg');
+}
+
+// Bold
+@font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/roboto-bold/roboto-bold.eot');
+    src: url('../fonts/roboto-bold/roboto-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-bold/roboto-bold.woff') format('woff'), url('../fonts/roboto-bold/roboto-bold.ttf') format('truetype'), url('../fonts/roboto-bold/roboto-bold.svg') format('svg');
+}
+
+// Black
+@font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/roboto-black/roboto-black.eot');
+    src: url('../fonts/roboto-black/roboto-black.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-black/roboto-black.woff') format('woff'), url('../fonts/roboto-black/roboto-black.ttf') format('truetype'), url('../fonts/roboto-black/roboto-black.svg') format('svg');
+}

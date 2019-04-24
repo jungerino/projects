@@ -1,0 +1,14 @@
+// --------------------------------------------------
+// Styles for demo pages
+// --------------------------------------------------
+
+// Variables, mixins, & functions
+@import './demo/demo-variables-mixins-functions';
+
+// Code highlighting
+@import './vendor/bootstrap4/code';
+
+// Demo styles
+@import './demo/jungerino-demo';
+@import './demo/fabricator';
+@import './demo/icomoon';

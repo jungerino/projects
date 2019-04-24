@@ -1,0 +1,55 @@
+
+// Functions
+// --------------------------------------------------
+
+// Function to permit color variables to be embedded in SVG data URIs
+// Lifted from https://stackoverflow.com/questions/25477819/scss-variable-in-background-image-with-svg-image-data-uri
+@function url-friendly-colour($colour) {
+    @return '%23' + str-slice('#{$colour}', 2, -1);
+}
+
+// Function to set contrasting text color
+@function contrast-text-color($color) {
+    @if (lightness($color) > 50) {
+        @return #000; // Lighter backgorund, return dark color
+    } @else {
+        @return #fff; // Darker background, return light color
+    }
+}
+
+// Convert PX values to REM
+// @function remy($pixels) {
+//     @return ($pixels / 16) * 1rem;
+// }
+@function remy($pixels) {
+
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+
+    @return ($pixels / 16px) * 1rem;
+}
+
+// Convert PX values to EM
+@function emy($pixels, $context: 16) {
+
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+
+    @return $pixels / $context * 1em;
+}
+
+// Lighten a color by adding white
+@function tint($color, $percentage) {
+    @return mix($white, $color, $percentage);
+}
+
+// Darken a color by adding black
+@function shade($color, $percentage) {
+    @return mix($black, $color, $percentage);
+}

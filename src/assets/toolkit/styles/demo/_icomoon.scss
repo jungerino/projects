@@ -1,0 +1,41 @@
+// --------------------------------------------------
+// Icomoon demo page overrides
+// --------------------------------------------------
+
+.mvm {
+    font-family: open-sans;
+    font-size: 24px;
+    font-weight: 300; // Book
+}
+
+.fs0 {
+    display: none;
+}
+
+.glyph.fs1 {
+    background-color: $white;
+    float: left;
+    height: 100px;
+    margin: 10px;
+    padding: 20px;
+    width: 240px;
+
+    i {
+        // font-size: 48px;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+.pbs {
+    text-align: center;
+
+    span {
+        display: block;
+    }
+}
+
+.mls {
+    font-size: 15px;
+    line-height: 1;
+}

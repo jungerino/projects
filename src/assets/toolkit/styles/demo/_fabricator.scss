@@ -1,0 +1,104 @@
+// --------------------------------------------------
+// Fabricator demo pages
+// --------------------------------------------------
+
+body {
+    background-color: $gray-1;
+}
+
+
+.f-item-notes {
+    margin-bottom: 30px;
+
+    code {
+        background-color: $white;
+        color: darken($jungerino-orange, 10%);
+        outline: 1px solid rgba($black, 0.1);
+    }
+
+    p {
+        max-width: none;
+    }
+}
+
+.f-control-bar + h1 {
+    color: $text-color;
+    font-family: open-sans;
+    font-weight: 300; // Light
+    margin-bottom: 30px;
+}
+
+.f-item-heading {
+    color: $text-color;
+    font-family: open-sans;
+    font-size: 18px;
+    font-weight: 700; // Bold
+    text-transform: uppercase;
+}
+
+.f-item-group {
+	border-bottom: 1px solid $gray-4;
+}
+
+.f-menu {
+    $menu-font-size: remy(14);
+    $menu-heading-size: remy(12);
+    
+    display: flex;
+    flex-direction: column;
+    font-family: 'open-sans';
+    font-size: $menu-font-size;
+    height: 100vh;
+    width: remy(200);
+
+    a {
+        font-size: $menu-font-size;
+        font-weight: 400; // Regular
+    }
+
+    .f-menu__heading {
+        align-items: center;
+        border-bottom: 1px solid $gray-2;
+        border-top: 1px solid $gray-2;
+        display: flex;
+        font-size: remy(16px);
+        font-weight: normal;
+        height: 42px;
+        margin-top: -1px;
+        padding-left: 1.5rem;
+        text-transform: none;
+    }
+
+    h2 {
+        color: $black;
+        font-size: $menu-heading-size;
+        font-weight: 700; // Bold
+        margin: 1rem 2rem 0.3rem;
+        border-bottom: 0;
+    }
+
+    .collapse {
+        height: auto;
+        overflow: auto;
+    }
+
+    .menu-links {
+        padding-top: $em-space;
+
+        a {
+            padding-left: $em-space;
+        }
+    }
+
+    > ul {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0; // Fabricator override
+        max-height: calc(100vh - 54px);
+
+        > li {
+            margin-top: 0;
+            // overflow: auto;
+        }
+    }
+}

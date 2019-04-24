@@ -1,0 +1,317 @@
+// --------------------------------------------------
+// Inputs & Form Elements
+// --------------------------------------------------
+
+
+// Checkbox
+// --------------------------------------------------
+
+%jungerino-checkbox {
+
+    // Mixin arguments:
+    // 1. checkbox border color
+    // 2. border hover color
+    // 3. checkbox background color
+    // 4. background hover color
+    // 5. checkbox size
+    // 6. checkmark color
+    // 7. checkbox border radius
+    // 8. Checkbox border thickness
+    @include jungerino-checkbox($gray-3, $primary, $white, $primary, emy(20px), $white, $border-radius, emy(2px));
+
+    &.disabled,
+    &[disabled] {
+        opacity: .4;
+    }
+
+    &.partial {
+        // Mixin arguments:
+        // 1. dash color
+        @include jungerino-checkbox-partial($white);
+    }
+}
+
+
+// Dropdowns
+// --------------------------------------------------
+
+// Single selection
+.jungerino-dropdown {
+    $dropdown-arrow-size: emy(24px);
+    $dropdown-arrow-padding: emy(30px);
+
+    position: relative;
+
+    > button {
+        @include btn-jungerino($text-color, $text-color, $white, $white, $gray-3, $primary);
+
+        overflow: hidden;
+        padding-right: $dropdown-arrow-padding;
+        text-overflow: ellipsis;
+
+        &::after {
+
+            // Styling for dropdown arrow
+            @include translate-y-center();
+
+            // Based on this svg: /src/assets/toolkit/svg/cfer/icon-24px-dropdown-arrow.svg
+            // Interpolated variable for fill color is in the format '#{url-friendly-colour($variable)}'
+            // The down arrow
+            // URI generated using this tool: https://codepen.io/tommiehansen/pen/RaXZzW
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='#{url-friendly-colour($text-color)}'%20d='M7%2010h10l-5%205z'/%3E%3C/svg%3E"); // sass-lint:disable-line quotes
+            content: '';
+            display: block;
+            height: $dropdown-arrow-size;
+            position: absolute;
+            right: $em-space-xxs;
+            text-align: left;
+            width: $dropdown-arrow-size;
+        }
+    }
+
+    // Invert arrow when menu is active
+    &.show {
+
+        > button {
+
+            &:after {
+                top: $em-space-xs; // TO-DO: why is top positioning needed here?
+                transform: rotate(180deg);
+            }
+        }
+
+        > .dropdown-menu {
+            display: block;
+        }
+    }
+
+    .menu-wrapper {
+
+        .dropdown-menu {
+            box-shadow: none;
+        }
+    }
+
+    .dropdown-menu {
+
+        @extend %shadow-raised;
+
+        $menu-font-size-px: 15px; // Converts to ems
+        $menu-font-size: emy($menu-font-size-px);
+
+        $menu-min-width-px: 160px;
+        $menu-min-width: emy($menu-min-width-px, $menu-font-size-px);
+
+        $menu-max-width-px: 350px;
+        $menu-max-width: emy($menu-max-width-px, $menu-font-size-px);
+
+        $menu-spacer-x: emy($btn-input-x-padding-px, $menu-font-size-px); // So menu x-padding matches button x-padding
+        $menu-spacer-y: $em-space-s;
+
+        font-size: $menu-font-size;
+        max-width: $menu-max-width;
+        min-width: $menu-min-width; // Bootstrap override
+        overflow: visible;
+        padding: $menu-spacer-y 0;
+
+        .dropdown-item {
+            $item-padding-y: $menu-spacer-y / 2; // So top padding plus bottom padding equal $menu-spacer-y
+
+            align-items: center;
+            color: $text-color;
+            display: flex;
+            line-height: $btn-input-line-height;
+            min-height: $btn-input-height;
+            padding: $item-padding-y $menu-spacer-x;
+            white-space: normal;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $gray-1;
+            }
+        }
+
+        .dropdown-header {
+            $header-target: 11px;
+            $header-context: $menu-font-size-px;
+            $header-ems: emy($header-target, $header-context);
+
+            $revert-context: ($header-context / $header-target); // So the x-padding can be the same as parent
+
+            color: $text-color;
+            font-size: $header-ems;
+            font-weight: 700; // Bold
+            height: $btn-input-height;
+            line-height: $btn-input-height;
+            padding: 0 ($menu-spacer-x * $revert-context);
+            text-transform: uppercase;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid $gray-2; // Bootstrap override
+        }
+    }
+}
+
+// Multiple selections
+.jungerino-multi-select {
+
+    @extend %jungerino-checkbox;
+
+    .checkbox-div {
+        margin-right: $em-space-s;
+    }
+
+    .dropdown-menu {
+
+        // The label is the clickable element
+        label {
+            white-space: normal;
+
+            input {
+                height: 0;
+            }
+
+            div {
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+.jungerino-checkbox {
+    @extend %jungerino-checkbox;
+}
+
+// Multi-column menu
+.jungerino-menu {
+    $menu-font-size-px: 15px; // Converts to ems
+    $menu-font-size: emy($menu-font-size-px);
+    $menu-spacer-x: emy($btn-input-x-padding-px, $menu-font-size-px);
+    $menu-max-height-px: 300px; // Customizable
+    $menu-max-height: emy($menu-max-height-px);
+    $menu-spacer-y: $em-space-s;
+    $max-width-px: 715px;
+    $max-width: emy($max-width-px);
+    $menu-entry-width-px: 230px;
+    $menu-entry-width: emy($menu-entry-width-px);
+    $menu-z-index: 1;
+
+    z-index: $menu-z-index;
+
+    &.show,
+    &.open {
+
+        .col-wrapper,
+        .dropdown-menu {
+            display: block;
+        }
+
+        button {
+            
+            &:after {
+                top: 0.5em;
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &.many-entries {
+
+        .dropdown-menu {
+            column-count: 3;
+        }
+
+        .col-wrapper {
+            max-height: $menu-max-height;
+            max-width: $max-width;
+            overflow-y: auto;
+            padding: 0 $menu-spacer-x;
+        }
+
+        .dropdown-item {
+            display: inline-block;
+        }
+    }
+
+    .col-wrapper {
+        @extend %shadow-raised;
+
+        background: $white;
+        border: emy(1px) solid $gray-3;
+        border-radius: $border-radius;
+        display: none;
+        margin-top: $input-menu-top-margin;
+        max-height: none;
+        overflow: visible;
+        position: absolute;
+    }
+
+    .dropdown-menu {
+        border: 0;
+        box-shadow: 0;
+        max-width: none;
+        min-width: none;
+        position: relative;
+
+        .dropdown-item {
+            cursor: pointer;
+            line-height: $btn-input-height;
+            overflow: hidden;
+            padding: 0 $menu-spacer-x;
+            position: relative;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $gray-1;
+                color: $text-color;
+            }
+
+            span {
+                display: block;
+                line-height: 1.1em;
+                padding-top: $em-space-xxxs;
+            }
+        }
+    }
+
+    button {
+        @include btn-jungerino($text-color, $text-color, $white, $white, $gray-3, $primary);
+
+        &.open {
+            background: $white;
+            color: $text-color;
+
+            &:focus, 
+            &:hover {
+                background: $white;
+                color: $text-color;
+            }
+        }
+    }
+}
+
+
+// Radio button
+// --------------------------------------------------
+
+%jungerino-radio-btn {
+
+    // Mixin arguments:
+    // 1. radio btn size
+    // 2. dot color
+    // 3. border color
+    // 4. border thickness
+    // 5. border hover color
+    // 6. background color
+
+    @include jungerino-radio-btn(emy(20px), $primary, $gray-3, emy(2px), $primary, $white);
+}
+
+.jungerino-radio-btn {
+    @extend %jungerino-radio-btn;
+
+    margin-right: $em-space-l;
+}

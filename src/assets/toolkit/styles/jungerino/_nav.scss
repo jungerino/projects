@@ -1,0 +1,76 @@
+// --------------------------------------------------
+// Navigation
+// --------------------------------------------------
+
+.nav-header {
+    @extend %shadow-raised;
+
+    background-color: $white;
+    padding: 0 $em-space-xl;
+
+    .navbar-brand {
+        font-size: emy(24px); // Bootstrap override
+        height: emy(56px, 24px);
+        margin-right: 1em;
+        padding: 0; // Bootstrap override
+
+        // Vertically center the logo. (Better way?)
+        > div {
+            @include translate-y-center();
+        }
+    }
+}
+
+.nav-horizontal {
+    $nav-height-default: 56px; // Height (converts to ems)
+    $nav-link-default: 12px; // Font size (converts to ems)
+    $nav-link-ems: emy($nav-link-default);
+    $nav-height-ems: emy($nav-height-default, $nav-link-default); // Adjusted for context
+
+    .nav-link {
+        color: $text-color-light;
+        font-size: $nav-link-ems;
+        font-weight: 500; // Medium
+        height: $nav-height-ems;
+        letter-spacing: 0.05em;
+        line-height: $nav-height-ems;
+        padding: 0 $em-space-xxl;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: $gray-1;
+            color: $primary;
+        }
+
+        i {
+            @include media-breakpoint-up(xl) {
+                font-size: emy(24px, $nav-link-default);
+            }
+
+            font-size: emy(32px, $nav-link-default);
+            margin: 0 0 0 $em-space-xxs;
+            vertical-align: middle;
+        }
+    }
+
+    .active {
+
+        .nav-link {
+            color: $primary;
+
+            &:after {
+                background-color: $primary;
+                bottom: 0;
+                content: '';
+                display: block;
+                height: emy(3, 12);
+                left: 0;
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,372 @@
+// --------------------------------------------------
+// Josh's experiments and works-in-progress
+// (Not linted)
+// --------------------------------------------------
+
+@import "../jungerino/shadows";
+
+// Parallax Containers
+// --------------------------------------------------
+
+.shadowbox-outer {
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.shadowbox-inner {
+    position: absolute;
+    transform-style: preserve-3d;
+
+    // Default camera: full-width, centered
+    height: 0; // height is controlled by 'padding hack'
+    left: 50%;
+    top: 50%;
+
+    > div {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    svg {
+        position: absolute;
+    }
+}
+
+.shadowbox-controls {
+
+    @extend %shadow-basic;
+
+    background-color: $white;
+    border-radius: $border-radius;
+    bottom: $em-space;
+    display: inline-block;
+    left: $em-space;
+    line-height: $btn-input-height;
+    padding: $em-space;
+    position: fixed;
+
+    > * {
+        display: inline-block;
+    }
+
+    .slider-value {
+        margin-right: $em-space;
+    }
+}
+
+
+// Clouds 1
+// --------------------------------------------------
+
+.clouds-1 {
+
+    // size of the shadowbox (inches)
+    $model-x: 8.25;
+    $model-y: 5.58;
+    $model-depth: 0.2; // depth of each layer
+
+    $x-y-ratio: $model-y / $model-x;
+    $x-depth-ratio: $model-depth / $model-x;
+
+    // the number of layers effected by parallax
+    // counting up from the background (parallax-layer-0)
+    $layers: 8;
+
+    // lower value = more dramatic effect
+    $perspective: 120vw;
+
+    $x-dimension: 60vw;
+    $y-dimension: $x-dimension * $x-y-ratio;
+
+    // distance between layers
+    $parallax-amount: $x-dimension * $x-depth-ratio;
+
+    perspective: $perspective;
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($x-dimension / 2);
+        margin-top: -($y-dimension / 2);
+        padding-bottom: $y-dimension; // 'Padding hack'
+        width: $x-dimension;
+
+        // Generate parallax layers
+        @include parallax-transforms($layers, $parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        // Initial position
+        &.camera-0 {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .parallax-layer-0 {
+        background-color: $messaging-yellow;
+    }
+
+    svg {
+        filter: drop-shadow(0 -1vh 2vh rgba(0,0,0,0.1));
+    }
+
+    svg[class^="svg-clouds1-1"] {
+        fill: $messaging-blue;
+    }
+
+    svg[class^="svg-clouds1-2"] {
+        fill: $messaging-blue-tint;
+    }
+}
+
+
+// Tile 1
+// --------------------------------------------------
+
+.tile-1 {
+
+    // size of the shadowbox (inches)
+    $model-x: 5;
+    $model-y: 5;
+    $model-depth: .2; // depth of each layer
+
+    $x-y-ratio: $model-y / $model-x;
+    $x-depth-ratio: $model-depth / $model-x;
+
+    // the number of layers effected by parallax
+    // counting up from the background (parallax-layer-0)
+    $layers: 7;
+
+    // lower value = more dramatic effect
+    $perspective: 70vw;
+
+    $x-dimension: 30vw;
+    $y-dimension: $x-dimension * $x-y-ratio;
+
+    // distance between layers
+    $parallax-amount: $x-dimension * $x-depth-ratio;
+
+    perspective: $perspective;
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($x-dimension / 2);
+        margin-top: -($y-dimension / 2);
+        padding-bottom: $y-dimension; // 'Padding hack'
+        width: $x-dimension;
+
+        // Generate parallax layers
+        @include parallax-transforms($layers, $parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        // Initial position
+        &.camera-0 {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .parallax-layer-0 {
+        background-color: $messaging-blue;
+    }
+
+    svg {
+        filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
+    }
+
+    svg[class^="svg-waves-1"] {
+        fill: $messaging-blue;
+    }
+
+    svg[class^="svg-waves-2"] {
+        fill: $messaging-blue-tint;
+    }
+
+    .svg-tile-7,
+    .svg-tile-5,
+    .svg-tile-3,
+    .svg-tile-1 {
+        fill: $messaging-blue-tint;
+    }
+
+    .svg-tile-6,
+    .svg-tile-4,
+    .svg-tile-2 {
+        fill: $messaging-blue-tint;
+    }
+}
+
+
+// Waves 1
+// --------------------------------------------------
+
+.waves-1 {
+
+    // size of the shadowbox (inches)
+    $model-x: 8;
+    $model-y: 5.41;
+    $model-depth: 0.2; // depth of each layer
+
+    $x-y-ratio: $model-y / $model-x;
+    $x-depth-ratio: $model-depth / $model-x;
+
+    // the number of layers effected by parallax
+    // counting up from the background (parallax-layer-0)
+    $layers: 7;
+
+    // lower value = more dramatic effect
+    // $perspective: 50;
+    $perspective: 150vw;
+
+    $x-dimension: 50vw;
+    $y-dimension: $x-dimension * $x-y-ratio;
+
+    // distance between layers
+    $parallax-amount: $x-dimension * $x-depth-ratio;
+
+    perspective: $perspective;
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($x-dimension / 2);
+        margin-top: -($y-dimension / 2);
+        padding-bottom: $y-dimension; // 'Padding hack'
+        width: $x-dimension;
+
+        // Generate parallax layers
+        @include parallax-transforms($layers, $parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        // Initial position
+        &.camera-0 {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .parallax-layer-0 {
+        background-color: $messaging-yellow;
+    }
+
+    svg {
+        filter: drop-shadow(0 -1vh 2vh rgba(0,0,0,0.1));
+    }
+
+    svg[class^="svg-waves-1"] {
+        fill: $messaging-blue;
+    }
+
+    svg[class^="svg-waves-2"] {
+        fill: $messaging-blue-tint;
+    }
+
+    .svg-shadow-egg-13,
+    .svg-shadow-egg-11,
+    .svg-shadow-egg-09,
+    .svg-shadow-egg-07,
+    .svg-shadow-egg-05,
+    .svg-shadow-egg-03,
+    .svg-shadow-egg-01 {
+        fill: $messaging-blue;
+    }
+
+    .svg-shadow-egg-12,
+    .svg-shadow-egg-10,
+    .svg-shadow-egg-08,
+    .svg-shadow-egg-06,
+    .svg-shadow-egg-04,
+    .svg-shadow-egg-02 {
+        fill: $messaging-blue-tint;
+    }
+}
+
+
+// Egg 1
+// --------------------------------------------------
+
+.egg-1 {
+
+    $model-dimensions: 5.3; // size of the shadowbox (inches)
+
+    $model-depth: 0.2; // depth of each layer (inches)
+
+    $dimensions-depth-ratio: $model-depth / $model-dimensions;
+
+    // the number of layers effected by parallax
+    // counting up from the background (parallax-layer-0)
+    $layers: 7;
+
+    // lower value = more dramatic effect
+    $perspective: 50;
+
+    // dimensions
+    $dimensions: 70vh;
+
+    // distance between layers
+    $parallax-amount: $dimensions-depth-ratio * $dimensions;
+
+    perspective: $perspective * 1vh; // a unit is required by Firefox
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($dimensions / 2);
+        margin-top: -($dimensions / 2);
+        padding-bottom: $dimensions; // 'Padding hack'
+        width: $dimensions;
+
+        // Generate parallax layers
+        @include parallax-transforms($layers, $parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        // Initial position
+        &.camera-0 {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .parallax-layer-0 {
+        background-color: $messaging-yellow;
+    }
+
+    svg {
+        filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
+    }
+
+    .svg-shadow-egg-13,
+    .svg-shadow-egg-11,
+    .svg-shadow-egg-09,
+    .svg-shadow-egg-07,
+    .svg-shadow-egg-05,
+    .svg-shadow-egg-03,
+    .svg-shadow-egg-01 {
+        fill: $messaging-blue;
+    }
+
+    .svg-shadow-egg-12,
+    .svg-shadow-egg-10,
+    .svg-shadow-egg-08,
+    .svg-shadow-egg-06,
+    .svg-shadow-egg-04,
+    .svg-shadow-egg-02 {
+        fill: $messaging-blue-tint;
+    }
+}

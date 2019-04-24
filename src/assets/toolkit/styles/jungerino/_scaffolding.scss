@@ -1,0 +1,59 @@
+// --------------------------------------------------
+// Scaffolding
+// --------------------------------------------------
+
+
+// SVGs
+// --------------------------------------------------
+
+// SVGs scale to their container, unless otherwise specified
+svg {
+    height: 100%;
+    width: 100%;
+}
+
+// Class for the glyph in a 2-color icon
+// Glyph inherits the color of the container
+.svg-icon-glyph {
+    fill: currentColor;
+}
+
+
+// Links
+// --------------------------------------------------
+
+a {
+
+    // Links within paragraphs
+    p & {
+        font-weight: 500; // Medium
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+    // Icon links
+    &.icon-link {
+        display: inline-block;
+        font-family: open-sans;
+        font-weight: 500; // Medium
+        line-height: remy(24);
+
+        i {
+            display: inline-block;
+            line-height: inherit;
+            margin-right: remy(3);
+            vertical-align: top;
+        }
+    }
+
+    // Block-style links
+    &.block-link {
+        font-size: .94em;
+        font-weight: 500; // Medium
+        text-transform: uppercase;
+    }
+}

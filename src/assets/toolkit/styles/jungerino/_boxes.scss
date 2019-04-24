@@ -1,0 +1,12 @@
+// --------------------------------------------------
+// Boxes for content
+// --------------------------------------------------
+
+.content-box {
+
+    @extend %shadow-basic;
+
+    background-color: $white;
+    border-radius: $border-radius;
+    padding: $em-space-xxxl;
+}

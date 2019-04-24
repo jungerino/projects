@@ -1,0 +1,243 @@
+// --------------------------------------------------
+// Tabs
+// --------------------------------------------------
+
+
+.tab-set {
+
+    $highlight-color: $primary;
+    $tab-height: $btn-input-height;
+    $tab-hover-color: $gray-2;
+
+    [role='tablist'] {
+
+        button {  
+            
+            @include truncate();
+
+            border-radius: $border-radius $border-radius 0 0;
+            height: $tab-height;
+
+            +button {
+                margin-left: $em-space-xxs;
+            }
+        }
+
+        &.tab-right {
+            justify-content: flex-end;
+        }
+
+        &.tab-left {
+            justify-content: flex-start;
+        }
+
+        &.tab-middle {
+            justify-content: center;
+        }
+    }
+
+    &.tab-box {
+
+        $tab-active-color: $white;
+        $tab-outline-color: $gray-3;
+        $stroke-px: 1px;
+        $stroke-ems: emy($stroke-px);
+
+        [role='tablist'] {  
+            display: flex;
+            flex-flow: row;
+
+            button { 
+                display: table-cell;
+                margin-bottom: $stroke-ems;
+                width: 50%;
+
+                div {
+                    display: inline-block;
+                }
+
+                &[aria-selected='true'] {
+                    background: $tab-active-color;
+                    border: 0;
+                    box-shadow: $tab-active-color 0 ($stroke-ems * 2) 0 0, $tab-outline-color 0 0 0 $stroke-ems;
+                    pointer-events: none;
+                }
+
+                &[aria-selected='false'] {
+                    background: $tab-outline-color;
+                    box-shadow: $tab-outline-color 0 0 0 $stroke-ems;
+                    color: $text-color-light;
+                }
+
+                &:hover {
+                    background: $tab-hover-color;
+                    box-shadow: $tab-hover-color 0 0 0 $stroke-ems;
+                    color: $highlight-color;
+                }
+
+                &:focus {
+                    box-shadow: $input-btn-focus-box-shadow;
+                }
+            }
+        }
+
+        [role='tabpanel'] {
+            background: $tab-active-color;
+            border-radius: 0 0 $border-radius $border-radius;
+            box-shadow: $tab-outline-color 0 0 0 $stroke-ems; 
+            padding: $em-space-l $em-space-xxl;
+
+            &:focus {
+
+                box-shadow: $input-btn-focus-box-shadow;
+                outline: 0;
+            }
+        }
+    }
+
+    &.tab-head {
+
+        $font-size-px: 18px;
+        $font-size-ems: emy($font-size-px);
+
+        $tab-width-px: 180px;
+        $tab-width-ems: emy($tab-width-px);
+
+        $tab-badge-size-px: 30px;
+        $tab-badge-size-ems: emy($tab-badge-size-px);
+        $tab-badge-font-size-px: 16px;
+        $tab-badge-font-size-ems: emy($tab-badge-font-size-px, $font-size-px);
+
+        [role='tablist'] {
+
+            display: flex;
+            font-size: $font-size-ems;
+
+            button { 
+                background: $gray-1;
+                border: 0;
+                height: $tab-height;
+                line-height: $tab-height;
+                min-width: $tab-width-ems;
+                padding: 0 $btn-input-x-padding;
+
+                &[aria-selected='true'] {
+                    pointer-events: none;
+                }
+
+                &[aria-selected='false'] {
+                    background-color: $gray-3;
+                    color: $text-color-light;
+                }
+
+                &:hover {
+                    background: $tab-hover-color;
+                    color: $highlight-color;
+                }
+
+                //circle notification
+                .tab-badge {
+                    background-color: $primary;
+                    border-radius: 50%;
+                    color: $white;
+                    display: inline-block;
+                    font-size: $tab-badge-font-size-ems;
+                    line-height: $tab-badge-size-ems;
+                    margin-left: $em-space-xs;
+                    pointer-events: none;
+                    width: $tab-badge-size-ems;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            [role='tablist'] {
+                margin-left: auto;
+                margin-right: auto;
+
+                button {
+                    padding-left: $em-space-s;
+                    padding-right: $em-space-s;
+                }
+            }
+        }
+    }
+
+    &.tab-underline {
+
+        $tab-width-px: 180px;
+        $tab-width-ems: emy($tab-width-px);
+        $tab-underline-color: $gray-2;
+
+        // Big number is used like a badge
+        $big-number-font-size-px: 24px;
+        $big-number-font-size-ems: emy($big-number-font-size-px);
+
+        [role='tablist'] { 
+
+            box-shadow: inset $tab-underline-color 0 $em-space-xxs*-1 0;
+            display: flex;
+
+            button { 
+                background: none;
+                border: 0;
+                display: flex; // So big number and label text are vertically aligned
+                margin-left: 0; // Override default
+                padding: 0 $em-space;
+
+                &:after {
+                    background-color: $highlight-color;
+                    bottom: 0;
+                    content: '';
+                    display: block;
+                    height: $em-space-xxs;
+                    left: 0;
+                    position: absolute;
+                    width: 100%;
+                }
+
+                &[aria-selected='true'] {
+                    pointer-events: none;
+                }
+
+                &[aria-selected='false'] {
+                    background-color: none;
+                    color: $text-color-light;
+
+                    div {
+                        color: $text-color-light;
+                    }
+
+                    &:after {
+                        background-color: $tab-underline-color;
+                    }
+                }
+
+                &:hover {
+                    background-color: $tab-hover-color;
+                    color: $highlight-color;
+
+                    div {
+                        color: $highlight-color;
+                    }
+                }
+
+                // Big number is used like a badge
+                .big-number {
+                    font-size: $big-number-font-size-ems;
+                    padding-right: $em-space-xxs;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            [role='tablist'] {
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+        }
+    }
+}

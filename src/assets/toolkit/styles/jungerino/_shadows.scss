@@ -1,0 +1,18 @@
+// --------------------------------------------------
+// Shadows
+// --------------------------------------------------
+
+// This approach to shadows draws from:
+// https://material.io/design/environment/light-shadows.html#shadows
+// and
+// https://codepen.io/dbox/pen/RawBEW
+
+// Shadow with minimal elevation; for things like content boxes.
+%shadow-basic {
+    @include material-shadow(1, 0.5); // Depth, strength, color (optional)
+}
+
+// Raised shaddow; for things like dropdowns, popovers, and elevated panels
+%shadow-raised {
+    @include material-shadow(2, 0.5); // Depth, strength, color (optional)
+}

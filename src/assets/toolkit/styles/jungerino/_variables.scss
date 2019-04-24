@@ -1,0 +1,225 @@
+// Colors
+// --------------------------------------------------
+
+// Black & White
+$black: #000;
+$white: #fff;
+
+// Brand
+$jungerino-orange: #f37321;
+$jungerino-gray: #464646;
+
+// Primary (Plum)
+$primary: #9c0d63;
+$primary-darker: shade($primary, 40%);
+$primary-lighter: tint($primary, 80%);
+
+// Grays
+$gray-1: #f6f6f6; // Lightest
+$gray-2: #e9e9e9;
+$gray-3: #bdbdbd;
+$gray-4: #a0a0a0; // Darkest
+
+// Messaging
+$messaging-blue: #3278c8;
+$messaging-blue-tint: tint($messaging-blue, 80%);
+$messaging-green: #00866b;
+$messaging-green-tint: tint($messaging-green, 85%);
+$messaging-yellow: #d8a202;
+$messaging-yellow-tint: tint($messaging-yellow, 75%);
+$messaging-red: #db2e00;
+$messaging-red-tint: tint($messaging-red, 85%);
+
+// Text
+$text-color: #3b3b3b;
+$text-color-light: lighten($text-color, 17.25%);
+$text-color-dark: darken($text-color, 20%);
+$text-color-lighter: lighten($text-color, 34.12%); // Only suitable for large, bold type
+
+// Links
+$link-color: $primary; // Bootstrap override
+$link-hover-color: $primary-darker; // Bootstrap override
+
+// Focus
+$fancy-focus-color: #42bffe;
+
+
+// Utility values
+// --------------------------------------------------
+
+// Borders
+$border-radius: emy(3px); // Bootstrap override
+
+// Space
+$em-space-xxxs: 1em * 0.125; // 2px at base
+$em-space-xxs: 1em * 0.25; // 4px at base
+$em-space-xs: 1em * 0.5; // 8px at base
+$em-space-s: 1em * 0.75; // 12px at base
+$em-space: 1em; // 16px at base size
+$em-space-l: 1em * 1.5; // 24px at base
+$em-space-xl: 1em * 2; // 32px at base
+$em-space-xxl: 1em * 2.5; // 40px at base
+$em-space-xxxl: 1em * 3; // 48px at base
+
+
+// Type
+// --------------------------------------------------
+
+// Default typeface
+$font-family-sans-serif: 'open-sans', Arial, sans-serif; // Bootstrap override
+$body-color: $text-color; // Bootstrap override
+$line-height-base: 1.6; // Bootstrap override
+$line-height-narrow: 1.4;
+$font-size-base-px: 16px; // Browser default font-size
+
+// Paragraphs
+$paragraph-margin-bottom: 1em; // Bootstrap override
+$paragraph-width: 32em; // ~70 characters per line
+
+
+// Headings
+// --------------------------------------------------
+
+// Sizes based on 'perfect fourth' scale: https://type-scale.com/
+$h1-size: 3.157em;
+$h2-size: 2.369em;
+$h3-size: 1.777em;
+$h4-size: 1.333em;
+$h5-size: 1em;
+
+// Heading deltas (deltas are scaled for varying layout contexts)
+$h1-delta: $h1-size - 1em;
+$h2-delta: $h2-size - 1em;
+$h3-delta: $h3-size - 1em;
+$h4-delta: $h4-size - 1em;
+$h5-delta: $h5-size - 1em;
+
+// Ratios for layout contexts
+$heading-ratio-full: 1; // Full width
+$heading-ratio-main: 0.7; // Main column
+$heading-ratio-narrow: 0.3; // Narrow column
+
+// H1 sizes and weights
+$h1-size-full: ($h1-delta * $heading-ratio-full) + 1em; // Full width
+$h1-size-main: ($h1-delta * $heading-ratio-main) + 1em; // Main column
+$h1-size-narrow: ($h1-delta * $heading-ratio-narrow) + 1em; // Narrow column
+$h1-weight-full: 200; // Light
+$h1-weight-main: 200; // Light
+$h1-weight-narrow: 500; // Medium
+
+// H2 sizes and weights
+$h2-size-full: ($h2-delta * $heading-ratio-full) + 1em; // Full width
+$h2-size-main: ($h2-delta * $heading-ratio-main) + 1em; // Main column
+$h2-size-narrow: ($h2-delta * $heading-ratio-narrow) + 1em; // Narrow column
+$h2-weight-full: 300; // Book
+$h2-weight-main: 300; // Book
+$h2-weight-narrow: 500; // Medium
+
+// H3 sizes and weights
+$h3-size-full: ($h3-delta * $heading-ratio-full) + 1em; // Full width
+$h3-size-main: ($h3-delta * $heading-ratio-main) + 1em; // Main column
+$h3-size-narrow: ($h3-delta * $heading-ratio-narrow) + 1em; // Narrow column
+$h3-weight-full: 300; // Book
+$h3-weight-main: 300; // Book
+$h3-weight-narrow: 400; // Regular
+
+// H4 sizes and weights
+$h4-size-full: ($h4-delta * $heading-ratio-full) + 1em; // Full width
+$h4-size-main: ($h4-delta * $heading-ratio-main) + 1em; // Main column
+$h4-size-narrow: ($h4-delta * $heading-ratio-narrow) + 1em; // Narrow column
+$h4-weight-full: 500; // Medium
+$h4-weight-main: 500; // Medium
+$h4-weight-narrow: 500; // Medium
+
+// H5 sizes and weights
+$h5-size-full: ($h5-delta * $heading-ratio-full) + 1em; // Full width
+$h5-size-main: ($h5-delta * $heading-ratio-main) + 1em; // Main column
+$h5-size-narrow: ($h5-delta * $heading-ratio-narrow) + 1em; // Narrow column
+$h5-weight-full: 700; // Bold
+$h5-weight-main: 700; // Bold
+$h5-weight-narrow: 700; // Bold
+
+
+// Navigation
+// --------------------------------------------------
+
+$nav-height: emy(56px);  // 56px tall at 16px base
+$enable-caret: false; // Bootstrap override
+$navbar-nav-link-padding-x: $em-space-xl; // Bootstrap override
+
+$logo-height-default: 1.2em;
+$logo-height-width-ratio: 4.05;
+
+
+// Grid
+// --------------------------------------------------
+
+// Add xxl breakpoint to bootstrap
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1500px // Added
+);
+
+// Add xxl container to bootstrap
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1430px // Added
+);
+
+
+// Cards
+// --------------------------------------------------
+
+$card-spacer-x: $em-space-xxl; // Bootstrap override
+$card-spacer-y: $em-space-l; // Bootstrap override
+$card-border-color: $gray-2;
+
+// Spacing for cards at xs (extra-small) breakpoint
+$card-spacer-xs-x: $em-space-xl;
+$card-spacer-xs-y: $em-space-l;
+
+
+// Buttons & Inputs
+// --------------------------------------------------
+
+// Button & input font
+$btn-input-font: 'open-sans';
+$btn-input-font-weight: 400; // Regular
+$btn-input-line-height: 1.4; // For wrapping text in a button or input
+
+// Focus
+$input-btn-focus-color: $fancy-focus-color; // Bootstrap override
+$input-btn-focus-width: 0.2rem; // Bootstrap override
+$input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color; // Bootstrap override
+
+// Button & input sizes
+$btn-input-height-px: 40px; // Buttons & inputs are 40px high when font-size is 16px (baseline)
+$btn-input-height: emy($btn-input-height-px); // Height in ems
+$btn-input-font-size-ratio: 16px / $btn-input-height-px; // (0.4) Ratio of button height to font-size. Useful for certain calculations
+$input-menu-top-margin-px: 3px;
+$input-menu-top-margin: emy($input-menu-top-margin-px);
+
+$btn-input-border-width-px: 1px; // Borders are 1px when font-size is 16px (baseline)
+$btn-input-border-width: emy($btn-input-border-width-px); // Border thickness in ems
+$btn-input-height-border-ratio: $btn-input-border-width-px / $btn-input-height-px; // (0.025) Ratio of button height to border width. Useful for certain calculations
+
+$btn-input-oval-radius: $btn-input-height / 2;
+
+$btn-input-x-padding-px: 17px;
+$btn-input-x-padding: emy($btn-input-x-padding-px);
+
+$btn-ghost-hover: rgba($black, 0.075);
+
+// Fixed heights
+$btn-small-height: remy(34px);
+$btn-medium-height: remy(40px);
+$btn-touch-height: remy(44px);
+$btn-large-height: remy(50px);
+$btn-jumbo-height: remy(60px);
