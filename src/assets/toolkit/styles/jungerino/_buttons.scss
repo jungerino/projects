@@ -88,7 +88,7 @@
 }
 
 .btn-special {
-    @include btn-jungerino($white, $white, $jungerino-orange, darken($jungerino-orange, 15%), transparent, transparent);
+    @include btn-jungerino($white, $white, $primary, darken($primary, 15%), transparent, transparent);
 
     border-radius: $btn-input-oval-radius; // Height divided by 2
     font-size: emy(21px);

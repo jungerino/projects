@@ -5,12 +5,8 @@
 $black: #000;
 $white: #fff;
 
-// Brand
-$jungerino-orange: #f37321;
-$jungerino-gray: #464646;
-
 // Primary
-$primary: #9c0d63;
+$primary: #0D2C54;
 $primary-darker: shade($primary, 40%);
 $primary-lighter: tint($primary, 80%);
 
@@ -21,13 +17,13 @@ $gray-3: #bdbdbd;
 $gray-4: #a0a0a0; // Darkest
 
 // Messaging
-$messaging-blue: #3278c8;
+$messaging-blue: #00A6ED;
 $messaging-blue-tint: tint($messaging-blue, 80%);
-$messaging-green: #00866b;
+$messaging-green: #73A800;
 $messaging-green-tint: tint($messaging-green, 85%);
-$messaging-yellow: #d8a202;
+$messaging-yellow: #FFB400;
 $messaging-yellow-tint: tint($messaging-yellow, 75%);
-$messaging-red: #db2e00;
+$messaging-red: #F6511D;
 $messaging-red-tint: tint($messaging-red, 85%);
 
 // Text
@@ -41,7 +37,7 @@ $link-color: $primary; // Bootstrap override
 $link-hover-color: $primary-darker; // Bootstrap override
 
 // Focus
-$fancy-focus-color: #42bffe;
+$fancy-focus-color: $messaging-blue;
 
 
 // Utility values
