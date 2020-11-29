@@ -65,7 +65,7 @@ const config = {
   },
   fonts: {
     toolkit: {
-      src: ['src/assets/toolkit/fonts/**/*'],
+      src: 'src/assets/toolkit/fonts/**/*',
       dest: 'dist/assets/toolkit/fonts',
       watch: 'src/assets/toolkit/fonts/**/*',
     },
@@ -153,7 +153,7 @@ const fonts = function pipeFonts() {
 }
 
 // vendor scripts
-const vendorScripts = function pipeFonts() {
+const vendorScripts = function pipeVendorScripts() {
   return gulp.src(config.vendorScripts.toolkit.src).pipe(gulp.dest(config.vendorScripts.toolkit.dest));
 }
 
