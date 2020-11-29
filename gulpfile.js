@@ -70,6 +70,13 @@ const config = {
       watch: 'src/assets/toolkit/fonts/**/*',
     },
   },
+  vendorScripts: {
+    toolkit: {
+      src: ['src/assets/toolkit/scripts/vendor/**/*'],
+      dest: 'dist/assets/toolkit/scripts/vendor',
+      watch: 'src/assets/toolkit/scripts/vendor/**/*',
+    },
+  },
   templates: {
     watch: 'src/**/*.{html,md,json,yml}',
   },
@@ -143,6 +150,11 @@ const images = gulp.series(imgFavicon, imgMinification);
 // fonts
 const fonts = function pipeFonts() {
   return gulp.src(config.fonts.toolkit.src).pipe(gulp.dest(config.fonts.toolkit.dest));
+}
+
+// vendor scripts
+const vendorScripts = function pipeFonts() {
+  return gulp.src(config.vendorScripts.toolkit.src).pipe(gulp.dest(config.vendorScripts.toolkit.dest));
 }
 
 // assembly
@@ -242,6 +254,11 @@ function watch() {
     gulp.series(fonts, reload)
   );
   gulp.watch(
+    config.vendorScripts.toolkit.watch,
+    { interval: 500 },
+    gulp.series(vendorScripts, reload)
+  );
+  gulp.watch(
     [config.styles.fabricator.watch, config.styles.toolkit.watch],
     { interval: 500 },
     gulp.series(styles, reload)
@@ -249,6 +266,6 @@ function watch() {
 }
 
 // default build task
-let tasks = [clean, styles, scripts, images, fonts, assembler];
+let tasks = [clean, styles, scripts, images, fonts, vendorScripts, assembler];
 if (config.dev) tasks = tasks.concat([serve, watch]);
 gulp.task('default', gulp.series(tasks));
