@@ -14,6 +14,23 @@ const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack');
 sass.compiler = require('node-sass');
 
+// SVG sprites
+const svgSprite = require('gulp-svg-sprite'),
+
+  // Basic configuration example
+  svgSpriteConfig = {
+    mode: {
+      inline: true,
+      symbol: true
+    }
+  };
+ 
+gulp.src('**/*.svg', { cwd: 'src/assets/toolkit/svg' })
+  .pipe(svgSprite(svgSpriteConfig))
+  .pipe(gulp.dest('dist/assets/toolkit/svg'));
+// End: SVG sprites
+
+
 let server = false;
 function reload(done) {
   if (server) server.reload();
