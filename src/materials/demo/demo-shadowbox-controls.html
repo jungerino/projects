@@ -1,0 +1,75 @@
+<div class="shadowbox-controls">
+    <span>x</span><input class="slider" id="x-slider" type="range" min="-100" max="100" step="1" value="0">
+    <span class="slider-value" id="x-value">0</span>
+    <span>y</span><input class="slider" id="y-slider" type="range" min="-100" max="100" step="1" value="0">
+    <span class="slider-value" id="y-value">0</span>
+    <span>z</span><input class="slider" id="z-slider" type="range" min="-50" max="50" step="1" value="0">
+    <span class="slider-value" id="z-value">0</span>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        // Selectors
+        var shadowbox = $('.shadowbox-inner');
+        var xSlider = $('#x-slider');
+        var ySlider = $('#y-slider');
+        var zSlider = $('#z-slider');
+
+        var xValue = $('#x-slider').attr('value');
+        var yValue = $('#y-slider').attr('value');
+        var zValue = $('#z-slider').attr('value');
+
+        var xValueLabel = $('#x-value');
+        var yValueLabel = $('#y-value');
+        var zValueLabel = $('#z-value');
+
+        // X slider change
+        xSlider.on('change', function() {
+
+            var xCurrent = ($(this).val());
+            var xCurrentUnit = (xCurrent + 'vh');
+
+            // Update variable
+            xValue = xCurrent;
+
+            // Update position
+            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+
+            // Update label
+            xValueLabel.html(xCurrentUnit);
+        });
+
+        // Y slider change
+        ySlider.on('change', function() {
+
+            var yCurrent = ($(this).val());
+            var yCurrentUnit = (yCurrent + 'vh');
+
+            // Update variable
+            yValue = yCurrent;
+
+            // Update position
+            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+
+            // Update label
+            yValueLabel.html(yCurrentUnit);
+        });
+
+        // Z slider change
+        zSlider.on('change', function() {
+
+            var zCurrent = ($(this).val());
+            var zCurrentUnit = (zCurrent + 'vh');
+
+            // Update variable
+            zValue = zCurrent;
+
+            // Update position
+            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+
+            // Update label
+            zValueLabel.html(zCurrentUnit);
+        });
+    });
+</script>
