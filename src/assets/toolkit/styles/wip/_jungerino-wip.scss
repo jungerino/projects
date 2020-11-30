@@ -320,10 +320,10 @@
     $layers: 7;
 
     // lower value = more dramatic effect
-    $perspective: 100;
+    $perspective: 300;
 
     // dimensions
-    $dimensions: 70vh;
+    $dimensions: 80vh;
 
     // distance between layers
     $parallax-amount: $dimensions-depth-ratio * $dimensions;
