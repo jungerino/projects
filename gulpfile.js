@@ -14,6 +14,23 @@ const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack');
 sass.compiler = require('node-sass');
 
+// SVG sprites
+const svgSprite = require('gulp-svg-sprite'),
+
+  // Basic configuration example
+  svgSpriteConfig = {
+    mode: {
+      inline: true,
+      symbol: true
+    }
+  };
+ 
+gulp.src('**/*.svg', { cwd: 'src/assets/toolkit/svg' })
+  .pipe(svgSprite(svgSpriteConfig))
+  .pipe(gulp.dest('dist/assets/toolkit/svg'));
+// End: SVG sprites
+
+
 let server = false;
 function reload(done) {
   if (server) server.reload();
@@ -65,9 +82,16 @@ const config = {
   },
   fonts: {
     toolkit: {
-      src: ['src/assets/toolkit/fonts/**/*'],
+      src: 'src/assets/toolkit/fonts/**/*',
       dest: 'dist/assets/toolkit/fonts',
       watch: 'src/assets/toolkit/fonts/**/*',
+    },
+  },
+  vendorScripts: {
+    toolkit: {
+      src: ['src/assets/toolkit/scripts/vendor/**/*'],
+      dest: 'dist/assets/toolkit/scripts/vendor',
+      watch: 'src/assets/toolkit/scripts/vendor/**/*',
     },
   },
   templates: {
@@ -143,6 +167,11 @@ const images = gulp.series(imgFavicon, imgMinification);
 // fonts
 const fonts = function pipeFonts() {
   return gulp.src(config.fonts.toolkit.src).pipe(gulp.dest(config.fonts.toolkit.dest));
+}
+
+// vendor scripts
+const vendorScripts = function pipeVendorScripts() {
+  return gulp.src(config.vendorScripts.toolkit.src).pipe(gulp.dest(config.vendorScripts.toolkit.dest));
 }
 
 // assembly
@@ -242,6 +271,11 @@ function watch() {
     gulp.series(fonts, reload)
   );
   gulp.watch(
+    config.vendorScripts.toolkit.watch,
+    { interval: 500 },
+    gulp.series(vendorScripts, reload)
+  );
+  gulp.watch(
     [config.styles.fabricator.watch, config.styles.toolkit.watch],
     { interval: 500 },
     gulp.series(styles, reload)
@@ -249,6 +283,6 @@ function watch() {
 }
 
 // default build task
-let tasks = [clean, styles, scripts, images, fonts, assembler];
+let tasks = [clean, styles, scripts, images, fonts, vendorScripts, assembler];
 if (config.dev) tasks = tasks.concat([serve, watch]);
 gulp.task('default', gulp.series(tasks));

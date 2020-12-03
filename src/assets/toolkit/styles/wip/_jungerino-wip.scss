@@ -6,12 +6,38 @@
 @import "../jungerino/shadows";
 
 
-// Camera Input Test
+// Shadowbox controls
 // --------------------------------------------------
 
-.camera-test {
-    margin-top: $em-space-xxxl;
+.shadowbox-controls {
+
+    @extend %shadow-basic;
+
+    background-color: $white;
+    border-radius: $border-radius;
+    bottom: 0;
+    display: inline-flex;
+    flex-direction: column;
+    left: 0;
+    line-height: $btn-input-height;
+    list-style-type: none;
+    margin: 0;
+    padding: $em-space;
+    position: fixed;
+    top: 0;
+    width: 12em;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slider {
+        width: 5em;
+    }
 }
+
 
 // Parallax Containers
 // --------------------------------------------------
@@ -44,28 +70,6 @@
 
     svg {
         position: absolute;
-    }
-}
-
-.shadowbox-controls {
-
-    @extend %shadow-basic;
-
-    background-color: $white;
-    border-radius: $border-radius;
-    bottom: $em-space;
-    display: inline-block;
-    left: $em-space;
-    line-height: $btn-input-height;
-    padding: $em-space;
-    position: fixed;
-
-    > * {
-        display: inline-block;
-    }
-
-    .slider-value {
-        margin-right: $em-space;
     }
 }
 
@@ -320,10 +324,10 @@
     $layers: 7;
 
     // lower value = more dramatic effect
-    $perspective: 50;
+    $perspective: 300;
 
     // dimensions
-    $dimensions: 70vh;
+    $dimensions: 80vh;
 
     // distance between layers
     $parallax-amount: $dimensions-depth-ratio * $dimensions;
@@ -377,4 +381,12 @@
     .svg-shadow-egg-02 {
         fill: $messaging-blue-tint;
     }
+}
+
+
+// Camera Input Test
+// --------------------------------------------------
+
+.camera-test {
+    margin-top: $em-space-xxxl;
 }
