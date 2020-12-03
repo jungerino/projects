@@ -1,75 +1,192 @@
-<div class="shadowbox-controls">
-    <span>x</span><input class="slider" id="x-slider" type="range" min="-100" max="100" step="1" value="0">
-    <span class="slider-value" id="x-value">0</span>
-    <span>y</span><input class="slider" id="y-slider" type="range" min="-100" max="100" step="1" value="0">
-    <span class="slider-value" id="y-value">0</span>
-    <span>z</span><input class="slider" id="z-slider" type="range" min="-50" max="50" step="1" value="0">
-    <span class="slider-value" id="z-value">0</span>
-</div>
+<ul class="shadowbox-controls">
+    <li><span>translate</span>
+        <ul>
+            <li>
+                <span>x</span>
+                <input class="slider" id="x-translate-slider" type="range" min="-100" max="100" step="1" value="0">
+                <span class="slider-value" id="x-translate-value">0</span>
+            </li>
+            <li>
+                <span>y</span>
+                <input class="slider" id="y-translate-slider" type="range" min="-100" max="100" step="1" value="0">
+                <span class="slider-value" id="y-translate-value">0</span>
+            </li>
+            <li>
+                <span>z</span>
+                <input class="slider" id="z-translate-slider" type="range" min="-50" max="50" step="1" value="0">
+                <span class="slider-value" id="z-translate-value">0</span>
+            </li>
+        </ul>
+    </li>
+    <li><span>rotate</span>
+        <ul>
+            <li>
+                <span>x</span>
+                <input class="slider" id="x-rotate-slider" type="range" min="-90" max="90" step="1" value="0">
+                <span class="slider-value" id="x-rotate-value">0</span>
+            </li>
+            <li>
+                <span>y</span>
+                <input class="slider" id="y-rotate-slider" type="range" min="-90" max="90" step="1" value="0">
+                <span class="slider-value" id="y-rotate-value">0</span>
+            </li>
+            <li>
+                <span>z</span>
+                <input class="slider" id="z-rotate-slider" type="range" min="-90" max="90" step="1" value="0">
+                <span class="slider-value" id="z-rotate-value">0</span>
+            </li>
+        </ul>
+    </li>
+    <li>perspective</li>
+        <ul>
+            <li>
+                <input class="slider" id="perspective-slider" type="range" min="0" max="500" step="1" value="0">
+                <span class="slider-value" id="perspective-value">0</span>
+            </li>
+        </ul>
+</ul>
 
 <script>
     $(document).ready(function(){
 
         // Selectors
-        var shadowbox = $('.shadowbox-inner');
-        var xSlider = $('#x-slider');
-        var ySlider = $('#y-slider');
-        var zSlider = $('#z-slider');
+        var $shadowboxOuter = $('.shadowbox-outer');
+        var $shadowboxInner = $('.shadowbox-inner');
+        var $xTranslateSlider = $('#x-translate-slider');
+        var $yTranslateSlider = $('#y-translate-slider');
+        var $zTranslateSlider = $('#z-translate-slider');
+        var $xRotateSlider = $('#x-rotate-slider');
+        var $yRotateSlider = $('#y-rotate-slider');
+        var $zRotateSlider = $('#z-rotate-slider');
+        var $perspectiveSlider = $('#perspective-slider');
 
-        var xValue = $('#x-slider').attr('value');
-        var yValue = $('#y-slider').attr('value');
-        var zValue = $('#z-slider').attr('value');
+        // Values
+        var xTranslateValue = $('#x-translate-slider').attr('value');
+        var yTranslateValue = $('#y-translate-slider').attr('value');
+        var zTranslateValue = $('#z-translate-slider').attr('value');
+        var xRotateValue = $('#x-rotate-slider').attr('value');
+        var yRotateValue = $('#y-rotate-slider').attr('value');
+        var zRotateValue = $('#z-rotate-slider').attr('value');
+        var perspectiveValue = $('#perspective-slider').attr('value');
 
-        var xValueLabel = $('#x-value');
-        var yValueLabel = $('#y-value');
-        var zValueLabel = $('#z-value');
+        // Labels
+        var $xTranslateValueLabel = $('#x-translate-value');
+        var $yTranslateValueLabel = $('#y-translate-value');
+        var $zTranslateValueLabel = $('#z-translate-value');
+        var $xRotateValueLabel = $('#x-rotate-value');
+        var $yRotateValueLabel = $('#y-rotate-value');
+        var $zRotateValueLabel = $('#z-rotate-value');
+        var $perspectiveValueLabel = $('#perspective-value');
 
-        // X slider change
-        xSlider.on('change', function() {
+        // Transform shadowbox
+        function transformBox() {
+            $shadowboxInner.css('transform', 'translate3d(' + xTranslateValue + 'vh,' + yTranslateValue + 'vh,' + zTranslateValue +  'vh) rotateX(' + xRotateValue + 'deg) rotateY(' + yRotateValue + 'deg) rotateZ(' + zRotateValue + 'deg)');
+        }
+
+        // Perspective change
+        $perspectiveSlider.on('change', function() {
+
+            var perspective = ($(this).val());
+            var perspectiveUnit = (perspective + 'vh');
+
+            // Update variable
+            perspectiveValue = perspective;
+
+            // Update label
+            $perspectiveValueLabel.html(perspectiveUnit);
+
+            // Update CSS
+            $shadowboxOuter.css('perspective', perspectiveUnit);
+        });
+
+        // X translate change
+        $xTranslateSlider.on('change', function() {
 
             var xCurrent = ($(this).val());
             var xCurrentUnit = (xCurrent + 'vh');
 
             // Update variable
-            xValue = xCurrent;
-
-            // Update position
-            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+            xTranslateValue = xCurrent;
 
             // Update label
-            xValueLabel.html(xCurrentUnit);
+            $xTranslateValueLabel.html(xCurrentUnit);
+
+            transformBox();
         });
 
-        // Y slider change
-        ySlider.on('change', function() {
+        // X rotate change
+        $xRotateSlider.on('change', function() {
+
+            var xCurrent = ($(this).val());
+            var xCurrentUnit = (xCurrent + 'deg');
+
+            // Update variable
+            xRotateValue = xCurrent;
+
+            // Update label
+            $xRotateValueLabel.html(xCurrentUnit);
+
+            transformBox();
+        });
+
+        // Y translate change
+        $yTranslateSlider.on('change', function() {
 
             var yCurrent = ($(this).val());
             var yCurrentUnit = (yCurrent + 'vh');
 
             // Update variable
-            yValue = yCurrent;
-
-            // Update position
-            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+            yTranslateValue = yCurrent;
 
             // Update label
-            yValueLabel.html(yCurrentUnit);
+            $yTranslateValueLabel.html(yCurrentUnit);
+
+            transformBox();
         });
 
-        // Z slider change
-        zSlider.on('change', function() {
+        // Y rotate change
+        $yRotateSlider.on('change', function() {
+
+            var yCurrent = ($(this).val());
+            var yCurrentUnit = (yCurrent + 'deg');
+
+            // Update variable
+            yRotateValue = yCurrent;
+
+            // Update label
+            $yRotateValueLabel.html(yCurrentUnit);
+
+            transformBox();
+        });
+
+        // Z translate change
+        $zTranslateSlider.on('change', function() {
 
             var zCurrent = ($(this).val());
             var zCurrentUnit = (zCurrent + 'vh');
 
             // Update variable
-            zValue = zCurrent;
-
-            // Update position
-            shadowbox.css('transform', 'translate3d(' + xValue + 'vh,' + yValue + 'vh,' + zValue +  'vh)');
+            zTranslateValue = zCurrent;
 
             // Update label
-            zValueLabel.html(zCurrentUnit);
+            $zTranslateValueLabel.html(zCurrentUnit);
+
+            transformBox();
+        });
+
+        // Z rotate change
+        $zRotateSlider.on('change', function() {
+
+            var zCurrent = ($(this).val());
+            var zCurrentUnit = (zCurrent + 'deg');
+
+            // Update variable
+            zRotateValue = zCurrent;
+
+            // Update label
+            $zRotateValueLabel.html(zCurrentUnit);
+
+            transformBox();
         });
     });
 </script>
