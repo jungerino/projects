@@ -1,25 +1,6 @@
 // sass-lint:disable no-color-literals
 
 
-
-// Shadowbox
-// --------------------------------------------------
-
-// Generate parallax layer transforms
-@mixin parallax-transforms($parallax-layers, $parallax-amount) {
-    @for $i from 0 through $parallax-layers {
-        $distance: ($parallax-amount * -1) * ($parallax-layers - $i);
-        .parallax-layer-#{$i}{
-
-            // 'translateZ' moves successive layers further back
-            // 'scale' provides depth correction (so layers don't get smaller in the distance)
-            transform: translateZ($distance);
-        }
-    }
-}
-
-
-
 // Buttons
 // --------------------------------------------------
 

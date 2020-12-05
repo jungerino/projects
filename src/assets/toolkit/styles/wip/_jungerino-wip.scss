@@ -39,6 +39,22 @@
 }
 
 
+// Shadowbox mixins
+// --------------------------------------------------
+
+// Generate parallax layer transforms
+@mixin parallax-transforms($parallax-layers, $parallax-amount) {
+    @for $i from 0 through $parallax-layers {
+        $distance: ($parallax-amount * -1) * ($parallax-layers - $i);
+        .parallax-layer-#{$i}{
+
+            // 'translateZ' moves successive layers further back
+            transform: translateZ($distance);
+        }
+    }
+}
+
+
 // Parallax Containers
 // --------------------------------------------------
 
@@ -70,6 +86,64 @@
 
     svg {
         position: absolute;
+    }
+}
+
+
+// Jellyfish 1
+// --------------------------------------------------
+
+.jellyfish-1 {
+
+    $model-dimensions: 5.3; // size of the shadowbox (inches)
+
+    $model-depth: 0.2; // depth of each layer (inches)
+
+    $dimensions-depth-ratio: $model-depth / $model-dimensions;
+
+    // the number of layers effected by parallax
+    // counting up from the background (parallax-layer-0)
+    $layers: 5;
+
+    // lower value = more dramatic effect
+    $perspective: 300;
+
+    // dimensions
+    $dimensions: 80vh;
+
+    // distance between layers
+    $parallax-amount: $dimensions-depth-ratio * $dimensions;
+
+    perspective: $perspective * 1vh; // a unit is required by Firefox
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($dimensions / 2);
+        margin-top: -($dimensions / 2);
+        padding-bottom: $dimensions; // 'Padding hack'
+        width: $dimensions;
+
+        // Generate parallax layers
+        @include parallax-transforms($layers, $parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        // Initial position
+        &.camera-0 {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .parallax-layer-0 {
+        background-color: $messaging-yellow;
+    }
+
+    svg {
+        fill: $white;
+        filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
     }
 }
 
