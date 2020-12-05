@@ -1,0 +1,149 @@
+// --------------------------------------------------
+// Josh's experiments and works-in-progress
+// (Not linted)
+// --------------------------------------------------
+
+
+// Shadowbox controls
+// --------------------------------------------------
+
+.shadowbox-controls {
+
+    @extend %shadow-basic;
+
+    background-color: $white;
+    border-radius: $border-radius;
+    bottom: 0;
+    display: inline-flex;
+    flex-direction: column;
+    left: 0;
+    line-height: $btn-input-height;
+    list-style-type: none;
+    margin: 0;
+    padding: $em-space;
+    position: fixed;
+    top: 0;
+    width: 12em;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slider {
+        width: 5em;
+    }
+}
+
+
+// Parallax Containers
+// --------------------------------------------------
+
+.shadowbox-outer {
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.shadowbox-inner {
+    height: 0; // height is controlled by 'padding hack'
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform-style: preserve-3d;
+
+    > div {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    svg {
+        position: absolute;
+    }
+}
+
+
+// Shadowbox mixins
+// --------------------------------------------------
+
+// Generate 20 levels of parallax transforms
+// layer-0 is closest to the viewer
+@mixin parallax-transforms($parallax-amount) {
+    @for $i from 0 through 20 {
+        $distance: ($parallax-amount * -1) * $i;
+        .parallax-layer-#{$i}{
+
+            // 'translateZ' moves successive layers further back
+            transform: translateZ($distance);
+        }
+    }
+}
+
+// @mixin parallax-config() {
+
+// }
+
+
+// Egg 2
+// --------------------------------------------------
+
+.egg-2 {
+
+    $model-dimensions-x: 5.3; // inches
+    $model-dimensions-y: 5.3; // inches
+    $viewing-distance: 12; // inches
+    $layer-depth: 0.2; // depth of each layer (inches)
+    $dimensions: 80vh; // width on screen
+
+    $height-width-ratio: $model-dimensions-y / $model-dimensions-x;
+    $depth-ratio: $layer-depth / $model-dimensions-x;
+    $distance-ratio: $viewing-distance / $model-dimensions-x;
+
+    // distance between layers
+    $parallax-amount: $depth-ratio * $dimensions;
+
+    // distance from viewer to viewing plane
+    perspective: $distance-ratio * $dimensions;
+
+    // transition duration
+    $transition: 0.25s;
+
+    .shadowbox-inner {
+        margin-left: -($dimensions / 2);
+        margin-top: -(($height-width-ratio * $dimensions) / 2);
+        padding-bottom: $height-width-ratio * $dimensions; // 'Padding hack'
+        width: $dimensions;
+
+        // Generate parallax layers
+        @include parallax-transforms($parallax-amount);
+
+        // Default camera transition
+        transition: all $transition;
+
+        > div {
+
+            &:last-of-type {
+                background-color: $messaging-yellow;
+            }
+        }
+    }
+
+    svg {
+        filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
+    }
+
+    .color-1 {
+        fill: $messaging-blue;
+    }
+
+    .color-2 {
+        fill: $messaging-blue-tint;
+    }
+}

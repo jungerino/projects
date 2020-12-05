@@ -6,44 +6,10 @@
 @import "../jungerino/shadows";
 
 
-// Shadowbox controls
-// --------------------------------------------------
-
-.shadowbox-controls {
-
-    @extend %shadow-basic;
-
-    background-color: $white;
-    border-radius: $border-radius;
-    bottom: 0;
-    display: inline-flex;
-    flex-direction: column;
-    left: 0;
-    line-height: $btn-input-height;
-    list-style-type: none;
-    margin: 0;
-    padding: $em-space;
-    position: fixed;
-    top: 0;
-    width: 12em;
-
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .slider {
-        width: 5em;
-    }
-}
-
-
 // Shadowbox mixins
 // --------------------------------------------------
 
-// Generate parallax layer transforms
-@mixin parallax-transforms($parallax-layers, $parallax-amount) {
+@mixin parallax-transforms-old($parallax-layers, $parallax-amount) {
     @for $i from 0 through $parallax-layers {
         $distance: ($parallax-amount * -1) * ($parallax-layers - $i);
         .parallax-layer-#{$i}{
@@ -55,41 +21,6 @@
 }
 
 
-// Parallax Containers
-// --------------------------------------------------
-
-.shadowbox-outer {
-    height: 100vh;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.shadowbox-inner {
-    position: absolute;
-    transform-style: preserve-3d;
-
-    // Default camera: full-width, centered
-    height: 0; // height is controlled by 'padding hack'
-    left: 50%;
-    top: 50%;
-
-    > div {
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-    }
-
-    svg {
-        position: absolute;
-    }
-}
-
-
 // Jellyfish 1
 // --------------------------------------------------
 
@@ -97,9 +28,9 @@
 
     $model-dimensions: 5.3; // size of the shadowbox (inches)
 
-    $model-depth: 0.2; // depth of each layer (inches)
+    $layer-depth: 0.2; // depth of each layer (inches)
 
-    $dimensions-depth-ratio: $model-depth / $model-dimensions;
+    $dimensions-depth-ratio: $layer-depth / $model-dimensions;
 
     // the number of layers effected by parallax
     // counting up from the background (parallax-layer-0)
@@ -126,7 +57,7 @@
         width: $dimensions;
 
         // Generate parallax layers
-        @include parallax-transforms($layers, $parallax-amount);
+        @include parallax-transforms-old($layers, $parallax-amount);
 
         // Default camera transition
         transition: all $transition;
@@ -156,10 +87,10 @@
     // size of the shadowbox (inches)
     $model-x: 8.25;
     $model-y: 5.58;
-    $model-depth: 0.2; // depth of each layer
+    $layer-depth: 0.2; // depth of each layer
 
     $x-y-ratio: $model-y / $model-x;
-    $x-depth-ratio: $model-depth / $model-x;
+    $x-depth-ratio: $layer-depth / $model-x;
 
     // the number of layers effected by parallax
     // counting up from the background (parallax-layer-0)
@@ -186,7 +117,7 @@
         width: $x-dimension;
 
         // Generate parallax layers
-        @include parallax-transforms($layers, $parallax-amount);
+        @include parallax-transforms-old($layers, $parallax-amount);
 
         // Default camera transition
         transition: all $transition;
@@ -223,10 +154,10 @@
     // size of the shadowbox (inches)
     $model-x: 5;
     $model-y: 5;
-    $model-depth: .2; // depth of each layer
+    $layer-depth: .2; // depth of each layer
 
     $x-y-ratio: $model-y / $model-x;
-    $x-depth-ratio: $model-depth / $model-x;
+    $x-depth-ratio: $layer-depth / $model-x;
 
     // the number of layers effected by parallax
     // counting up from the background (parallax-layer-0)
@@ -253,7 +184,7 @@
         width: $x-dimension;
 
         // Generate parallax layers
-        @include parallax-transforms($layers, $parallax-amount);
+        @include parallax-transforms-old($layers, $parallax-amount);
 
         // Default camera transition
         transition: all $transition;
@@ -303,10 +234,10 @@
     // size of the shadowbox (inches)
     $model-x: 8;
     $model-y: 5.41;
-    $model-depth: 0.2; // depth of each layer
+    $layer-depth: 0.2; // depth of each layer
 
     $x-y-ratio: $model-y / $model-x;
-    $x-depth-ratio: $model-depth / $model-x;
+    $x-depth-ratio: $layer-depth / $model-x;
 
     // the number of layers effected by parallax
     // counting up from the background (parallax-layer-0)
@@ -334,7 +265,7 @@
         width: $x-dimension;
 
         // Generate parallax layers
-        @include parallax-transforms($layers, $parallax-amount);
+        @include parallax-transforms-old($layers, $parallax-amount);
 
         // Default camera transition
         transition: all $transition;
@@ -389,9 +320,9 @@
 
     $model-dimensions: 5.3; // size of the shadowbox (inches)
 
-    $model-depth: 0.2; // depth of each layer (inches)
+    $layer-depth: 0.2; // depth of each layer (inches)
 
-    $dimensions-depth-ratio: $model-depth / $model-dimensions;
+    $dimensions-depth-ratio: $layer-depth / $model-dimensions;
 
     // the number of layers effected by parallax
     // counting up from the background (parallax-layer-0)
@@ -418,7 +349,7 @@
         width: $dimensions;
 
         // Generate parallax layers
-        @include parallax-transforms($layers, $parallax-amount);
+        @include parallax-transforms-old($layers, $parallax-amount);
 
         // Default camera transition
         transition: all $transition;

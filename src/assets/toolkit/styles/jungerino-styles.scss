@@ -39,6 +39,7 @@ $theme-colors: map-remove($theme-colors, 'secondary', 'info', 'warning', 'light'
 @import './jungerino/menus';
 @import './jungerino/nav';
 @import './jungerino/scaffolding';
+@import './jungerino/shadowboxes';
 @import './jungerino/shadows';
 @import './jungerino/tabs';
 @import './jungerino/type';
