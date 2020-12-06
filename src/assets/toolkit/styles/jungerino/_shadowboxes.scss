@@ -69,8 +69,12 @@
     }
 
     svg {
-        filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
         position: absolute;
+
+        // Apply shadow to the bottom svg of each layer
+        &:first-of-type {
+            filter: drop-shadow(0 1vh 1vh rgba(0,0,0,0.2));
+        }
     }
 }
 
@@ -96,7 +100,8 @@
 // $viewing-distance: 12 // inches
 // $layer-depth: 0.2 // depth of each layer (inches)
 // $dimensions: 80vh // width on screen
-@mixin parallax-config($model-dimensions-x: 10, $model-dimensions-y: 10, $viewing-distance: 12, $layer-depth: 0.2, $dimensions: 80vh) {
+// $background: $messaging-yellow
+@mixin parallax-config($model-dimensions-x: 10, $model-dimensions-y: 10, $viewing-distance: 12, $layer-depth: 0.2, $dimensions: 80vh, $background: $messaging-yellow) {
 
     $height-width-ratio: $model-dimensions-y / $model-dimensions-x;
     $depth-ratio: $layer-depth / $model-dimensions-x;
@@ -109,13 +114,65 @@
     perspective: $distance-ratio * $dimensions;
 
     .shadowbox-inner {
+
+        // Generate parallax layers
+        @include parallax-transforms($parallax-amount);
+
         margin-left: -($dimensions / 2);
         margin-top: -(($height-width-ratio * $dimensions) / 2);
         padding-bottom: $height-width-ratio * $dimensions; // 'Padding hack'
         width: $dimensions;
 
-        // Generate parallax layers
-        @include parallax-transforms($parallax-amount);
+        // Background color for bottom layer
+        > div {
+
+            &:first-of-type {
+                background-color: $background;
+            }
+        }
+    }
+}
+
+
+// Jellyfish 2
+// --------------------------------------------------
+
+.jellyfish-2 {
+
+    // $model-dimensions-x: 10 // inches
+    // $model-dimensions-y: 10 // inches
+    // $viewing-distance: 12 // inches
+    // $layer-depth: 0.2 // depth of each layer (inches)
+    // $dimensions: 80vh // width on screen
+    // $background: $messaging-yellow
+    @include parallax-config($model-dimensions-x: 9, $model-dimensions-y: 9, $layer-depth: 0.3, $dimensions: 90vh, $background: shade($messaging-blue, 30%));
+
+    .color-0 {
+        fill: $text-color-dark;
+    }
+
+    .color-1 {
+        fill: shade($messaging-blue, 30%);
+    }
+
+    .color-2 {
+        fill: $messaging-blue;
+    }
+
+    .color-3 {
+        fill: $messaging-yellow;
+    }
+
+    .color-4 {
+        fill: $messaging-red;
+    }
+
+    .color-5 {
+        fill: shade($messaging-yellow, 20%);
+    }
+
+    .color-6 {
+        fill: shade($messaging-red, 20%);
     }
 }
 
@@ -125,17 +182,13 @@
 
 .egg-2 {
 
+    // $model-dimensions-x: 10 // inches
+    // $model-dimensions-y: 10 // inches
+    // $viewing-distance: 12 // inches
+    // $layer-depth: 0.2 // depth of each layer (inches)
+    // $dimensions: 80vh // width on screen
+    // $background: $messaging-yellow
     @include parallax-config($model-dimensions-x: 5.3, $model-dimensions-y: 5.3);
-
-    .shadowbox-inner {
-
-        > div {
-
-            &:last-of-type {
-                background-color: $messaging-yellow;
-            }
-        }
-    }
 
     .color-1 {
         fill: $messaging-blue;
